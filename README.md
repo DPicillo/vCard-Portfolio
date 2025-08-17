@@ -1,6 +1,6 @@
 # David Picillo - Professional Portfolio
 
-A modern, responsive portfolio website showcasing the professional experience and skills of David Picillo, Cloud DevOps Engineer.
+A modern, responsive portfolio website showcasing the professional experience and skills.
 
 ## 🌟 Features
 
