@@ -1,6 +1,6 @@
-# David Picillo - Professional Portfolio
+# David Picillo - Professional blog
 
-A modern, responsive portfolio website showcasing the professional experience and skills.
+A modern, responsive blogwebsite showcasing the professional experience and skills.
 
 ## 🌟 Features
 
@@ -23,12 +23,12 @@ A modern, responsive portfolio website showcasing the professional experience an
 ## 📁 Project Structure
 
 ```
-vCard-Portfolio/
+vCard-blog/
 ├── src/
 │   ├── styles/
 │   │   └── main.css          # Main stylesheet
 │   ├── scripts/
-│   │   └── portfolio.js      # Main JavaScript functionality
+│   │   └── blog.js      # Main JavaScript functionality
 │   └── assets/
 │       ├── images/           # Profile images and photos
 │       └── icons/            # Icon assets
@@ -44,8 +44,8 @@ vCard-Portfolio/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/vCard-Portfolio.git
-   cd vCard-Portfolio
+   git clone https://github.com/yourusername/vCard-blog.git
+   cd vCard-blog
    ```
 
 2. **Local Development**
@@ -67,7 +67,7 @@ vCard-Portfolio/
 
 ## 🌐 Language Support
 
-The portfolio supports both German and English languages:
+The blogsupports both German and English languages:
 
 - **Default Language**: English (with automatic browser language detection)
 - **Language Toggle**: Top-right corner flag buttons
@@ -76,7 +76,7 @@ The portfolio supports both German and English languages:
 
 ## 📱 Responsive Design
 
-The portfolio is fully responsive and optimized for:
+The blogis fully responsive and optimized for:
 
 - **Desktop**: 1200px and above
 - **Tablet**: 768px - 1199px
@@ -118,7 +118,7 @@ The portfolio is fully responsive and optimized for:
 1. Add HTML structure in `index.html`
 2. Include both German and English content with appropriate `data-lang` attributes
 3. Style the new section in `src/styles/main.css`
-4. Update navigation if needed in `src/scripts/portfolio.js`
+4. Update navigation if needed in `src/scripts/blog.js`
 
 ## 🚀 Deployment
 
@@ -126,7 +126,7 @@ The portfolio is fully responsive and optimized for:
 1. Push your code to a GitHub repository
 2. Go to Settings > Pages
 3. Select source branch (usually `main`)
-4. Your site will be available at `https://yourusername.github.io/vCard-Portfolio`
+4. Your site will be available at `https://yourusername.github.io/vCard-blog`
 
 ### Custom Domain
 1. Update all URLs in the code from `localhost` to your domain

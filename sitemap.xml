@@ -33,14 +33,14 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://david.picillo.de/#resume" />
   </url>
   
-  <!-- Portfolio section -->
+  <!-- blogsection -->
   <url>
-    <loc>https://david.picillo.de/#portfolio</loc>
+    <loc>https://david.picillo.de/#blog</loc>
     <lastmod>2024-08-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://david.picillo.de/#portfolio" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://david.picillo.de/#portfolio" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.picillo.de/#blog" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://david.picillo.de/#blog" />
   </url>
   
 </urlset>

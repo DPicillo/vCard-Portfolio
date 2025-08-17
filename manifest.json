@@ -1,7 +1,7 @@
 {
-  "name": "David Picillo - Cloud DevOps Engineer Portfolio",
+  "name": "David Picillo - Cloud DevOps Engineer blog",
   "short_name": "David Picillo",
-  "description": "Professional portfolio of David Picillo, experienced Cloud DevOps Engineer specializing in AWS, Kubernetes, and Infrastructure as Code",
+  "description": "Professional blogof David Picillo, experienced Cloud DevOps Engineer specializing in AWS, Kubernetes, and Infrastructure as Code",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#FFFFFF",
