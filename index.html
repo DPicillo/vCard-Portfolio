@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>David Picillo - Cloud DevOps Engineer | AWS & Kubernetes Expert</title>
+  <meta name="title" content="David Picillo - Cloud DevOps Engineer | AWS & Kubernetes Expert">
+  <meta name="description" content="Experienced Cloud DevOps Engineer specializing in AWS, Kubernetes, and Infrastructure as Code. AWS Solutions Architect Professional certified with expertise in CI/CD, monitoring, and cloud platform engineering.">
+  <meta name="keywords" content="David Picillo, Cloud DevOps Engineer, AWS, Kubernetes, DevOps, Infrastructure as Code, Terraform, Docker, CI/CD, Cloud Architecture, System Integration, OBI Smart Technologies">
+  <meta name="author" content="David Picillo">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="English">
+  <meta name="revisit-after" content="7 days">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://david.picillo.de/">
+  
+  <!-- Hreflang for multilingual content -->
+  <link rel="alternate" hreflang="en" href="https://david.picillo.de/">
+  <link rel="alternate" hreflang="de" href="https://david.picillo.de/">
+  <link rel="alternate" hreflang="x-default" href="https://david.picillo.de/">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://david.picillo.de/">
+  <meta property="og:title" content="David Picillo - Cloud DevOps Engineer | AWS & Kubernetes Expert">
+  <meta property="og:description" content="Experienced Cloud DevOps Engineer specializing in AWS, Kubernetes, and Infrastructure as Code. AWS Solutions Architect Professional certified with expertise in CI/CD, monitoring, and cloud platform engineering.">
+  <meta property="og:image" content="https://david.picillo.de/src/assets/images/DPicillo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="David Picillo - Cloud DevOps Engineer">
+  <meta property="og:site_name" content="David Picillo Portfolio">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="de_DE">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://david.picillo.de/">
+  <meta property="twitter:title" content="David Picillo - Cloud DevOps Engineer | AWS & Kubernetes Expert">
+  <meta property="twitter:description" content="Experienced Cloud DevOps Engineer specializing in AWS, Kubernetes, and Infrastructure as Code. AWS Solutions Architect Professional certified.">
+  <meta property="twitter:image" content="https://david.picillo.de/src/assets/images/DPicillo.png">
+  <meta property="twitter:image:alt" content="David Picillo - Cloud DevOps Engineer">
+  
+  <!-- LinkedIn -->
+  <meta property="article:author" content="https://linkedin.com/in/david-picillo">
+  
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "David Picillo",
+    "jobTitle": "Cloud DevOps Engineer",
+    "description": "Experienced Cloud DevOps Engineer specializing in AWS, Kubernetes, and Infrastructure as Code",
+    "url": "https://david.picillo.de",
+    "image": "https://david.picillo.de/src/assets/images/DPicillo.png",
+    "email": "david.picillo@example.com",
+    "telephone": "+49-221-335-22795",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Cologne",
+      "addressCountry": "Germany"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "OBI Smart Technologies GmbH",
+      "url": "https://www.obi.de"
+    },
+    "alumniOf": {
+      "@type": "Organization",
+      "name": "IHK Cologne"
+    },
+    "hasCredential": [
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "AWS Certified Solutions Architect - Professional",
+        "credentialCategory": "Professional Certification",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "Amazon Web Services"
+        },
+        "dateCreated": "2024-08"
+      },
+      {
+        "@type": "EducationalOccupationalCredential",
+        "name": "Certified Kubernetes Administrator (CKA)",
+        "credentialCategory": "Professional Certification",
+        "recognizedBy": {
+          "@type": "Organization",
+          "name": "Linux Foundation"
+        },
+        "dateCreated": "2023-11"
+      }
+    ],
+    "knowsAbout": [
+      "Amazon Web Services (AWS)",
+      "Kubernetes",
+      "DevOps",
+      "Infrastructure as Code",
+      "Terraform",
+      "Docker",
+      "CI/CD",
+      "Linux Administration",
+      "Cloud Architecture",
+      "System Integration"
+    ],
+    "sameAs": [
+      "https://linkedin.com/in/david-picillo",
+      "https://github.com/dpicillo",
+      "https://xing.com/profile/David_Picillo"
+    ]
+  }
+  </script>
+  
+  <!-- Language Toggle Styles -->
+  <style>
+    .language-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 8px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 8px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .lang-btn {
+      width: 40px;
+      height: 30px;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .lang-btn.active {
+      border-color: #F97316;
+      box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+    }
+    
+    .lang-btn:hover {
+      transform: scale(1.05);
+    }
+    
+    .lang-de {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjMDAwMDAwIi8+CjxyZWN0IHk9IjEwIiB3aWR0aD0iNDAiIGhlaWdodD0iMTAiIGZpbGw9IiNERDAwMDAiLz4KPHJlY3QgeT0iMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIxMCIgZmlsbD0iI0ZGQ0UwMCIvPgo8L3N2Zz4K');
+    }
+    
+    .lang-en {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjQjIyMjM0Ii8+CjxyZWN0IHk9IjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSI2IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMTAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIxNCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHk9IjE4IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIyNiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHdpZHRoPSIxNiIgaGVpZ2h0PSIxNCIgZmlsbD0iIzNCNEE5QSIvPgo8L3N2Zz4K');
+    }
+    
+    [data-lang="en"] .de-text { display: none; }
+    [data-lang="de"] .en-text { display: none; }
+    [data-lang="en"] .en-text { display: block; }
+    [data-lang="de"] .de-text { display: block; }
+  </style>
+
+  <!--
+    - favicon and PWA manifest
+  -->
+  <link rel="shortcut icon" href="./src/assets/images/logo.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="192x192" href="./src/assets/images/DPicillo.png">
+  <link rel="apple-touch-icon" href="./src/assets/images/DPicillo.png">
+  <link rel="manifest" href="./manifest.json">
+  
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="#F97316">
+  <meta name="msapplication-TileColor" content="#F97316">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="David Picillo">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./src/styles/main.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body data-lang="en">
+
+  <!-- Language Toggle -->
+  <div class="language-toggle">
+    <button class="lang-btn lang-de" onclick="setLanguage('de')" title="Deutsch"></button>
+    <button class="lang-btn lang-en active" onclick="setLanguage('en')" title="English"></button>
+  </div>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./src/assets/images/DPicillo.png" alt="David Picillo" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="David Picillo">David Picillo</h1>
+
+          <p class="title">
+            <span class="de-text">Cloud DevOps Engineer</span>
+            <span class="en-text">Cloud DevOps Engineer</span>
+          </p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span class="de-text">Kontakte anzeigen</span>
+          <span class="en-text">Show Contacts</span>
+
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <a href="mailto:david.picillo@example.com" class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </a>
+
+            <div class="contact-info">
+              <p class="contact-title">
+                <span class="de-text">E-Mail</span>
+                <span class="en-text">Email</span>
+              </p>
+
+              <a href="mailto:david.picillo@example.com" class="contact-link">david.picillo@example.com</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <a href="tel:+4922133522795" class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </a>
+
+            <div class="contact-info">
+              <p class="contact-title">
+                <span class="de-text">Telefon</span>
+                <span class="en-text">Phone</span>
+              </p>
+
+              <a href="tel:+4922133522795" class="contact-link">+49 (221) 335-22795</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">
+                <span class="de-text">Geburtstag</span>
+                <span class="en-text">Birthday</span>
+              </p>
+
+              <time datetime="1995-01-01">
+                <span class="de-text">Januar 1995</span>
+                <span class="en-text">January 1995</span>
+              </time>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <a href="https://www.google.com/maps/search/Köln,+Deutschland" target="_blank" rel="noopener" class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </a>
+
+            <div class="contact-info">
+              <p class="contact-title">
+                <span class="de-text">Standort</span>
+                <span class="en-text">Location</span>
+              </p>
+
+              <address>
+                <span class="de-text">Köln, Deutschland</span>
+                <span class="en-text">Cologne, Germany</span>
+              </address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://linkedin.com/in/david-picillo" class="social-link">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://github.com/dpicillo" class="social-link">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://xing.com/profile/David_Picillo" class="social-link">
+              <ion-icon name="briefcase-outline"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+
+
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #NAVBAR
+      -->
+
+      <nav class="navbar">
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <button class="navbar-link  active" data-nav-link>
+              <span class="de-text">Über mich</span>
+              <span class="en-text">About</span>
+            </button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>
+              <span class="de-text">Lebenslauf</span>
+              <span class="en-text">Resume</span>
+            </button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link>Portfolio</button>
+          </li>
+
+
+        </ul>
+
+      </nav>
+
+
+
+
+
+      <!--
+        - #ABOUT
+      -->
+
+      <article class="about  active" data-page="about">
+
+        <header>
+          <h2 class="h2 article-title">
+            <span class="de-text">Über mich</span>
+            <span class="en-text">About me</span>
+          </h2>
+        </header>
+
+        <section class="about-text">
+          <p class="de-text">
+            Nach meinem Abschluss als Fachinformatiker Systemintegration bei OBI Services habe ich bei OBI Smart Technologies GmbH eine Karriere als DevOps Engineer begonnen. Meine Kernkompetenzen umfassen Cloud-Technologien, insbesondere Amazon Web Services (AWS) und die Verwaltung von Kubernetes-Clustern.
+          </p>
+          <p class="en-text">
+            After completing my training as an IT Systems Integration Specialist at OBI Services, I began a career as a DevOps Engineer at OBI Smart Technologies GmbH. My core competencies include cloud technologies, particularly Amazon Web Services (AWS) and the management of Kubernetes clusters.
+          </p>
+
+          <p class="de-text">
+            In meiner aktuellen Rolle als Cloud DevOps Engineer unterstütze ich bei der Weiterentwicklung unserer Cloud-Plattform. Ich spezialisiere mich auf Infrastructure as Code, Container-Orchestrierung und die Implementierung von CI/CD-Pipelines für moderne Cloud-native Anwendungen.
+          </p>
+          <p class="en-text">
+            In my current role as a Cloud DevOps Engineer, I support the development of our cloud platform. I specialize in Infrastructure as Code, container orchestration, and the implementation of CI/CD pipelines for modern cloud-native applications.
+          </p>
+        </section>
+
+
+        <!--
+          - service
+        -->
+
+        <section class="service">
+
+          <h3 class="h3 service-title">
+            <span class="de-text">Was ich mache</span>
+            <span class="en-text">What i'm doing</span>
+          </h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./src/assets/images/icon-dev.svg" alt="cloud icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">
+                  <span class="de-text">Cloud Infrastructure</span>
+                  <span class="en-text">Cloud Infrastructure</span>
+                </h4>
+
+                <p class="service-item-text">
+                  <span class="de-text">Professionelle Verwaltung und Skalierung von AWS Cloud-Infrastrukturen mit modernen DevOps-Praktiken.</span>
+                  <span class="en-text">Professional management and scaling of AWS cloud infrastructures with modern DevOps practices.</span>
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./src/assets/images/icon-app.svg" alt="kubernetes icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">
+                  <span class="de-text">Kubernetes Administration</span>
+                  <span class="en-text">Kubernetes Administration</span>
+                </h4>
+
+                <p class="service-item-text">
+                  <span class="de-text">Verwaltung und Orchestrierung von Container-Clustern sowohl On-Premise als auch in der Cloud (EKS).</span>
+                  <span class="en-text">Management and orchestration of container clusters both on-premise and in the cloud (EKS).</span>
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./src/assets/images/icon-design.svg" alt="automation icon" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">
+                  <span class="de-text">CI/CD & Automation</span>
+                  <span class="en-text">CI/CD & Automation</span>
+                </h4>
+
+                <p class="service-item-text">
+                  <span class="de-text">Implementierung von automatisierten Deployment-Pipelines und Infrastructure as Code mit Terraform.</span>
+                  <span class="en-text">Implementation of automated deployment pipelines and Infrastructure as Code with Terraform.</span>
+                </p>
+              </div>
+
+            </li>
+
+            <li class="service-item">
+
+              <div class="service-icon-box">
+                <img src="./src/assets/icons/icon-photo.svg" alt="Monitoring and Logging Services Icon" width="40" height="40" loading="lazy">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">
+                  <span class="de-text">Monitoring & Logging</span>
+                  <span class="en-text">Monitoring & Logging</span>
+                </h4>
+
+                <p class="service-item-text">
+                  <span class="de-text">Aufbau und Wartung von Logging-, Tracing- und Monitoring-Systemen für Cloud-native Anwendungen.</span>
+                  <span class="en-text">Setup and maintenance of logging, tracing, and monitoring systems for cloud-native applications.</span>
+                </p>
+              </div>
+
+            </li>
+
+          </ul>
+
+        </section>
+
+
+
+      </article>
+
+
+
+
+
+      <!--
+        - #RESUME
+      -->
+
+      <article class="resume" data-page="resume">
+
+        <header>
+          <h2 class="h2 article-title">
+            <span class="de-text">Lebenslauf</span>
+            <span class="en-text">Resume</span>
+          </h2>
+        </header>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">
+              <span class="de-text">Bildung</span>
+              <span class="en-text">Education</span>
+            </h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">AWS Certified Solutions Architect - Professional</h4>
+
+              <span>August 2024</span>
+
+              <p class="timeline-text">
+                <span class="de-text">Zertifizierung für fortgeschrittene AWS-Architektur und Cloud-Lösungsdesign. Zertifikats-ID: 1cef1aad1aac476f8b74fe71a661b65b</span>
+                <span class="en-text">Advanced AWS architecture and cloud solution design certification. Certificate ID: 1cef1aad1aac476f8b74fe71a661b65b</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Certified Kubernetes Administrator (CKA)</h4>
+
+              <span>November 2023</span>
+
+              <p class="timeline-text">
+                <span class="de-text">Linux Foundation Zertifizierung für Kubernetes Cluster Administration. Zertifikats-ID: LF-9fr7eqizs9</span>
+                <span class="en-text">Linux Foundation certification for Kubernetes Cluster Administration. Certificate ID: LF-9fr7eqizs9</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">ITIL® Foundation Certificate</h4>
+
+              <span>Mai 2023</span>
+
+              <p class="timeline-text">
+                <span class="de-text">IT Service Management Foundation Zertifizierung von PeopleCert. Gültig bis Mai 2026.</span>
+                <span class="en-text">IT Service Management Foundation certification from PeopleCert. Valid until May 2026.</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">LPIC-1 Linux Professional</h4>
+
+              <span>März 2023</span>
+
+              <p class="timeline-text">
+                <span class="de-text">Linux Professional Institute Zertifizierung Level 1. Gültig bis März 2028.</span>
+                <span class="en-text">Linux Professional Institute certification Level 1. Valid until March 2028.</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">
+                <span class="de-text">Fachinformatiker Systemintegration</span>
+                <span class="en-text">IT Systems Integration Specialist</span>
+              </h4>
+
+              <span>
+                <span class="de-text">2019 — Juni 2022</span>
+                <span class="en-text">2019 — June 2022</span>
+              </span>
+
+              <p class="timeline-text">
+                <span class="de-text">Ausbildung bei OBI Services mit Abschluss bei der IHK Köln. Schwerpunkt auf Systemintegration und IT-Infrastruktur.</span>
+                <span class="en-text">Training at OBI Services with graduation from IHK Cologne. Focus on system integration and IT infrastructure.</span>
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">
+              <span class="de-text">Berufserfahrung</span>
+              <span class="en-text">Experience</span>
+            </h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">DevOps Engineer</h4>
+
+              <span>
+                <span class="de-text">Februar 2024 — Heute</span>
+                <span class="en-text">February 2024 — Present</span>
+              </span>
+
+              <p class="timeline-text">
+                <span class="de-text">OBI Smart Technologies GmbH, Köln (Hybrid). Cloud-Technologien, SAML 2.0, Amazon EKS und erweiterte DevOps-Praktiken. Weiterentwicklung der Cloud-Plattform.</span>
+                <span class="en-text">OBI Smart Technologies GmbH, Cologne (Hybrid). Cloud technologies, SAML 2.0, Amazon EKS and advanced DevOps practices. Development of the cloud platform.</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Junior DevOps Engineer</h4>
+
+              <span>
+                <span class="de-text">Juli 2023 — Februar 2024</span>
+                <span class="en-text">July 2023 — February 2024</span>
+              </span>
+
+              <p class="timeline-text">
+                <span class="de-text">OBI Smart Technologies GmbH, Köln (Hybrid). Kubernetes Cluster Administration (Cloud - EKS), Logging, Tracing und Monitoring, Cloud Platform Engineering.</span>
+                <span class="en-text">OBI Smart Technologies GmbH, Cologne (Hybrid). Kubernetes Cluster Administration (Cloud - EKS), logging, tracing and monitoring, Cloud Platform Engineering.</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Junior System Engineer</h4>
+
+              <span>
+                <span class="de-text">Juni 2022 — August 2023</span>
+                <span class="en-text">June 2022 — August 2023</span>
+              </span>
+
+              <p class="timeline-text">
+                <span class="de-text">OBI Smart Technologies GmbH, Wermelskirchen. Linux Serveradministration, Konzeptionierung und Lifecycle Management, 3rd-Level-Support, Kubernetes Cluster Administration (On-Premise).</span>
+                <span class="en-text">OBI Smart Technologies GmbH, Wermelskirchen. Linux server administration, conceptualization and lifecycle management, 3rd-level support, Kubernetes Cluster Administration (On-Premise).</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">
+                <span class="de-text">Fachinformatiker Systemintegration</span>
+                <span class="en-text">IT Systems Integration Specialist</span>
+              </h4>
+
+              <span>
+                <span class="de-text">2019 — Juni 2022</span>
+                <span class="en-text">2019 — June 2022</span>
+              </span>
+
+              <p class="timeline-text">
+                <span class="de-text">Ausbildung bei OBI Services mit Abschluss bei der IHK Köln. Schwerpunkt auf Systemintegration und IT-Infrastruktur.</span>
+                <span class="en-text">Training at OBI Services with graduation from IHK Cologne. Focus on system integration and IT infrastructure.</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">
+                <span class="de-text">Praktikum - Fachinformatiker</span>
+                <span class="en-text">Internship - IT Specialist</span>
+              </h4>
+
+              <span>
+                <span class="de-text">September 2017</span>
+                <span class="en-text">September 2017</span>
+              </span>
+
+              <p class="timeline-text">
+                <span class="de-text">Barmenia Versicherungen, Wuppertal. Einmonatiges Praktikum im Rahmen der Ausbildungsvorbereitung.</span>
+                <span class="en-text">Barmenia Insurance, Wuppertal. One-month internship as part of training preparation.</span>
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
+        <section class="skill">
+
+          <h3 class="h3 skills-title">
+            <span class="de-text">Meine Kenntnisse</span>
+            <span class="en-text">My Skills</span>
+          </h3>
+
+          <div class="skills-grid content-card">
+            <div class="skill-tag expert">Amazon Web Services (AWS)</div>
+            <div class="skill-tag expert">Kubernetes</div>
+            <div class="skill-tag advanced">Linux Administration</div>
+            <div class="skill-tag advanced">Docker</div>
+            <div class="skill-tag advanced">Terraform</div>
+            <div class="skill-tag advanced">GitLab CI/CD</div>
+            <div class="skill-tag intermediate">Google Cloud Platform (GCP)</div>
+            <div class="skill-tag intermediate">Python</div>
+            <div class="skill-tag intermediate">Ansible</div>
+          </div>
+
+        </section>
+
+      </article>
+
+
+
+
+
+      <!--
+        - #PORTFOLIO
+      -->
+
+      <article class="portfolio" data-page="portfolio">
+
+        <header>
+          <h2 class="h2 article-title">Portfolio</h2>
+        </header>
+
+        <section class="projects">
+
+          <div style="text-align: center; padding: 60px 20px; color: var(--light-gray); font-size: var(--fs-3); font-weight: var(--fw-500);">
+            TBD
+          </div>
+
+        </section>
+
+      </article>
+
+
+
+
+
+
+    </div>
+
+  </main>
+
+
+
+
+
+
+  <!--
+    - custom js link
+  -->
+  <script src="./src/scripts/portfolio.js"></script>
+  
+  <!-- Language Toggle Script -->
+  <script>
+    function setLanguage(lang) {
+      document.body.setAttribute('data-lang', lang);
+      
+      // Update active button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector('.lang-' + lang).classList.add('active');
+      
+      // Store preference
+      localStorage.setItem('preferred-language', lang);
+    }
+    
+    // Load saved language preference or detect browser language
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedLang = localStorage.getItem('preferred-language');
+      
+      if (savedLang) {
+        setLanguage(savedLang);
+      } else {
+        // Detect browser language
+        const browserLang = navigator.language || navigator.userLanguage;
+        const defaultLang = browserLang.startsWith('de') ? 'de' : 'en';
+        setLanguage(defaultLang);
+      }
+    });
+  </script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

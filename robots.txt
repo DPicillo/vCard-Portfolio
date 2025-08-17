@@ -1,0 +1,36 @@
+# Robots.txt for David Picillo Portfolio
+# https://david.picillo.de/robots.txt
+
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl the site
+Allow: /src/
+Allow: /src/styles/
+Allow: /src/scripts/
+Allow: /src/assets/
+
+# Disallow any admin or private directories (if they exist in the future)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /node_modules/
+
+# Sitemap location
+Sitemap: https://david.picillo.de/sitemap.xml
+
+# Crawl-delay (optional, in seconds)
+Crawl-delay: 1
+
+# Specific instructions for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
