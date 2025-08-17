@@ -763,16 +763,7 @@ Group Name LDAP Attribute: cn</pre>
           
           <div class="code-block">
             <pre># Option 1: Automatische Rollenzuweisung
-# 1. In Keycloak: User Federation → Mappers → Add mapper
-
-Mapper Name: ad-role-mapper
-Mapper Type: role-ldap-mapper
-LDAP Roles DN: OU=Roles,DC=example,DC=com
-Role Name LDAP Attribute: cn
-Role Object Classes: group
-Membership User LDAP Attribute: sAMAccountName
-Membership LDAP Attribute: member
-Mode: IMPORT</pre>
+TBD</pre>
           </div>
 
           <h4 style="color: var(--white-2); margin: 20px 0 10px 0;">
@@ -789,11 +780,7 @@ Mode: IMPORT</pre>
           
           <div class="code-block">
             <pre># Option 2: Standard-Rollenzuweisung
-# 1. In Keycloak: User Federation → Mappers → Add mapper
-
-Mapper Name: default-role-mapper
-Mapper Type: hardcoded-ldap-role-mapper
-Role: default-user-role
+TBD
 </pre>
           </div>
 
