@@ -33,14 +33,24 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://david.picillo.de/#resume" />
   </url>
   
-  <!-- blogsection -->
+  <!-- Blog section -->
   <url>
     <loc>https://david.picillo.de/#blog</loc>
-    <lastmod>2024-08-17</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://david.picillo.de/#blog" />
     <xhtml:link rel="alternate" hreflang="de" href="https://david.picillo.de/#blog" />
+  </url>
+  
+  <!-- Blog Articles -->
+  <url>
+    <loc>https://david.picillo.de/blog/keycloak-active-directory/</loc>
+    <lastmod>2025-01-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://david.picillo.de/blog/keycloak-active-directory/" />
+    <xhtml:link rel="alternate" hreflang="de" href="https://david.picillo.de/blog/keycloak-active-directory/" />
   </url>
   
 </urlset>
