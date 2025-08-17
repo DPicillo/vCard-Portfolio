@@ -376,6 +376,17 @@ main {
 
 .sidebar.active { max-height: 405px; }
 
+/* Adjust sidebar height for mobile and tablets to accommodate contact header */
+@media (max-width: 1024px) {
+  .sidebar {
+    max-height: 160px; /* Increased height to show contact header */
+  }
+  
+  .sidebar.active {
+    max-height: 450px; /* Increased height for expanded state */
+  }
+}
+
 .sidebar-info {
   position: relative;
   display: flex;
@@ -418,6 +429,48 @@ main {
   border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.contact-header {
+  display: none !important; /* Hidden by default (desktop) */
+}
+
+/* Show contact header on mobile devices and tablets (including iPad) */
+@media (max-width: 1024px) {
+  .contact-header {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    border-radius: 12px;
+    color: var(--orange-yellow-crayola);
+    font-size: var(--fs-7);
+    font-weight: var(--fw-500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 8px;
+  }
+
+  .contact-header:hover {
+    background: rgba(249, 115, 22, 0.15);
+    border-color: var(--orange-yellow-crayola);
+    transform: translateY(-1px);
+  }
+
+  .contact-header ion-icon {
+    font-size: 14px;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.active .contact-header ion-icon {
+    transform: rotate(180deg);
+  }
 }
 
 .info_more-btn {
@@ -677,6 +730,73 @@ main {
   font-weight: var(--fw-400);
   line-height: 1.6;
   letter-spacing: 0.1px;
+}
+
+/**
+ * service links (blog)
+ */
+
+.service-item .service-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+.service-item .service-link:hover .service-item-title {
+  color: var(--orange-yellow-crayola);
+  transition: color 0.3s ease;
+}
+
+.service-item .service-link:hover .service-item-text {
+  color: var(--white-2);
+  transition: color 0.3s ease;
+}
+
+/* Blocks-specific styling */
+.blocks .service-item {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.blocks .service-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-top: 20px solid var(--orange-yellow-crayola);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.blocks .service-item:hover::after {
+  opacity: 0.7;
+}
+
+.blocks .service-item:not(:first-child) {
+  position: relative;
+}
+
+.blocks .service-item:not(:first-child)::before {
+  content: "Coming Soon";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(156, 163, 175, 0.9);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: var(--fw-500);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 2;
+  pointer-events: none;
 }
 
 

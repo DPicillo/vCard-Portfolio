@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>Keycloak & Active Directory Integration - David Picillo</title>
+  <meta name="title" content="Keycloak & Active Directory Integration - David Picillo">
+  <meta name="description" content="Comprehensive guide to integrating Keycloak with Active Directory using LDAP User Federation for Single Sign-On (SSO) with existing AD accounts.">
+  <meta name="keywords" content="Keycloak, Active Directory, LDAP, SSO, IAM, Identity Access Management, Identity Management, DevOps, User Federation, Authentication, Single Sign-On, Identity Provider">
+  <meta name="author" content="David Picillo">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="de,en">
+  <meta name="revisit-after" content="7 days">
+  <meta name="rating" content="General">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://picillo.de/blog/keycloak-active-directory/">
+  
+  <!-- Hreflang for multilingual SEO -->
+  <link rel="alternate" hreflang="de" href="https://picillo.de/blog/keycloak-active-directory/">
+  <link rel="alternate" hreflang="en" href="https://picillo.de/blog/keycloak-active-directory/">
+  <link rel="alternate" hreflang="x-default" href="https://picillo.de/blog/keycloak-active-directory/">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="David Picillo - Cloud DevOps Engineer">
+  <meta property="og:title" content="Keycloak & Active Directory Integration Guide">
+  <meta property="og:description" content="Step-by-step guide for integrating Keycloak with Active Directory using LDAP User Federation. Enable SSO with existing AD accounts - no new account creation required.">
+  <meta property="og:image" content="https://picillo.de/src/assets/images/DPicillo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Keycloak Active Directory Integration Architecture Diagram">
+  <meta property="og:url" content="https://picillo.de/blog/keycloak-active-directory/">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:locale:alternate" content="en_US">
+  
+  <!-- Article specific Open Graph -->
+  <meta property="article:author" content="David Picillo">
+  <meta property="article:published_time" content="2025-01-15T10:00:00Z">
+  <meta property="article:modified_time" content="2025-01-15T10:00:00Z">
+  <meta property="article:section" content="Identity and Access Management">
+  <meta property="article:tag" content="Keycloak">
+  <meta property="article:tag" content="Active Directory">
+  <meta property="article:tag" content="LDAP">
+  <meta property="article:tag" content="SSO">
+  <meta property="article:tag" content="IAM">
+  <meta property="article:tag" content="Identity Management">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dpicillo">
+  <meta name="twitter:creator" content="@dpicillo">
+  <meta name="twitter:title" content="Keycloak & Active Directory Integration Guide">
+  <meta name="twitter:description" content="Complete guide to integrating Keycloak with Active Directory using LDAP User Federation. Enable enterprise SSO with existing AD accounts.">
+  <meta name="twitter:image" content="https://picillo.de/src/assets/images/DPicillo.png">
+  <meta name="twitter:image:alt" content="Keycloak Active Directory Integration Guide">
+  
+  <!-- Language Toggle Styles -->
+  <style>
+    .language-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 4px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+    
+    .language-toggle:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    
+    .lang-btn {
+      width: 28px;
+      height: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .lang-btn.active {
+      border-color: #F97316;
+      box-shadow: 0 1px 4px rgba(249, 115, 22, 0.3);
+    }
+    
+    .lang-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .lang-de {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjMDAwMDAwIi8+CjxyZWN0IHk9IjEwIiB3aWR0aD0iNDAiIGhlaWdodD0iMTAiIGZpbGw9IiNERDAwMDAiLz4KPHJlY3QgeT0iMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIxMCIgZmlsbD0iI0ZGQ0UwMCIvPgo8L3N2Zz4K');
+    }
+    
+    .lang-en {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjQjIyMjM0Ii8+CjxyZWN0IHk9IjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSI2IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMTAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIxNCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHk9IjE4IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIyNiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHdpZHRoPSIxNiIgaGVpZ2h0PSIxNCIgZmlsbD0iIzNCNEE5QSIvPgo8L3N2Zz4K');
+    }
+    
+    @media (max-width: 580px) {
+      .language-toggle {
+        opacity: 0.4;
+        transform: scale(0.8);
+        top: 5px;
+        right: 5px;
+      }
+      
+      .language-toggle:hover {
+        opacity: 1;
+        transform: scale(1);
+      }
+      
+      .lang-btn {
+        width: 24px;
+        height: 16px;
+      }
+    }
+    
+    @media (min-width: 1250px) {
+      .language-toggle {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        opacity: 0.8;
+      }
+    }
+    
+    [data-lang="en"] .de-text { display: none; }
+    [data-lang="de"] .en-text { display: none; }
+    [data-lang="en"] .en-text { display: block; }
+    [data-lang="de"] .de-text { display: block; }
+    
+    /* Article-specific styles */
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--orange-yellow-crayola);
+      text-decoration: none;
+      margin-bottom: 20px;
+      font-weight: var(--fw-500);
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      background: rgba(249, 115, 22, 0.05);
+    }
+    
+    .back-button:hover {
+      transform: translateX(-2px);
+      background: rgba(249, 115, 22, 0.1);
+      border-color: var(--orange-yellow-crayola);
+    }
+    
+    .article-meta {
+      color: var(--light-gray-70);
+      font-size: var(--fs-7);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    
+    .article-subtitle {
+      color: var(--light-gray);
+      font-size: var(--fs-5);
+      font-weight: var(--fw-400);
+      text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    
+    .diagram-container {
+      text-align: center;
+      margin: 30px 0;
+      background: var(--border-gradient-onyx);
+      border-radius: 16px;
+      padding: 24px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .diagram-container::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      background: var(--bg-gradient-jet);
+      border-radius: inherit;
+      z-index: -1;
+    }
+    
+    .diagram-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+    
+    .code-block {
+      background: var(--border-gradient-onyx);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .code-block::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      background: var(--smoky-black);
+      border-radius: inherit;
+      z-index: -1;
+    }
+    
+    .code-block pre {
+      margin: 0;
+      color: var(--white-2);
+      font-size: var(--fs-7);
+      line-height: 1.6;
+    }
+    
+    .highlight {
+      background: rgba(249, 115, 22, 0.1);
+      border-left: 4px solid var(--orange-yellow-crayola);
+      padding: 15px 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+    }
+    
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+      justify-content: center;
+    }
+    
+    .tag {
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--orange-yellow-crayola);
+      padding: 5px 12px;
+      border-radius: 15px;
+      font-size: var(--fs-8);
+      font-weight: var(--fw-500);
+      border: 1px solid rgba(249, 115, 22, 0.2);
+    }
+    
+    .section {
+      margin: 40px 0;
+    }
+    
+    .section h2 {
+      color: var(--white-2);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--orange-yellow-crayola);
+    }
+    
+    .section h3 {
+      color: var(--white-2);
+      margin: 25px 0 15px 0;
+    }
+    
+    .section p {
+      color: var(--light-gray);
+      line-height: 1.7;
+      margin-bottom: 15px;
+    }
+    
+    .section ul {
+      color: var(--light-gray);
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .section li {
+      margin-bottom: 8px;
+      line-height: 1.6;
+    }
+  </style>
+
+  <!--
+    - favicon and PWA manifest
+  -->
+  <link rel="shortcut icon" href="../../src/assets/images/logo.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="192x192" href="../../src/assets/images/DPicillo.png">
+  <link rel="apple-touch-icon" href="../../src/assets/images/DPicillo.png">
+  <link rel="manifest" href="../../manifest.json">
+  
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="#F97316">
+  <meta name="msapplication-TileColor" content="#F97316">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="David Picillo - Keycloak Integration">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="../../src/styles/main.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="stylesheet" href="../../src/assets/fonts/poppins.css">
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "Keycloak User Federation mit Active Directory",
+    "alternativeHeadline": "Keycloak User Federation with Active Directory",
+    "description": "Comprehensive guide to integrating Keycloak with Active Directory using LDAP User Federation for Single Sign-On (SSO) with existing AD accounts - no new account creation required",
+    "author": {
+      "@type": "Person",
+      "name": "David Picillo",
+      "url": "https://picillo.de",
+      "jobTitle": "Cloud DevOps Engineer",
+      "sameAs": [
+        "https://linkedin.com/in/david-picillo",
+        "https://github.com/dpicillo"
+      ]
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "David Picillo",
+      "url": "https://picillo.de"
+    },
+    "datePublished": "2025-01-15T10:00:00Z",
+    "dateModified": "2025-01-15T10:00:00Z",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://picillo.de/blog/keycloak-active-directory/"
+    },
+    "image": {
+      "@type": "ImageObject",
+      "url": "https://picillo.de/src/assets/diagrams/keycloak-ad-architecture.svg",
+      "width": 800,
+      "height": 600,
+      "caption": "Keycloak Active Directory Integration Architecture"
+    },
+    "articleSection": "Identity and Access Management",
+    "keywords": [
+      "Keycloak",
+      "Active Directory",
+      "LDAP",
+      "SSO",
+      "IAM",
+      "Identity Access Management",
+      "Identity Management",
+      "User Federation",
+      "Authentication",
+      "Single Sign-On",
+      "Identity Provider",
+      "DevOps"
+    ],
+    "about": [
+      {
+        "@type": "Thing",
+        "name": "Keycloak",
+        "description": "Open source identity and access management solution"
+      },
+      {
+        "@type": "Thing",
+        "name": "Active Directory",
+        "description": "Microsoft's directory service for Windows domain networks"
+      },
+      {
+        "@type": "Thing",
+        "name": "LDAP",
+        "description": "Lightweight Directory Access Protocol"
+      }
+    ],
+    "tutorial": {
+      "@type": "HowTo",
+      "name": "How to integrate Keycloak with Active Directory",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Create LDAP Provider",
+          "text": "Navigate in the Keycloak Admin Console to User Federation and create a new LDAP Provider"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Configure Basic Settings",
+          "text": "Set up Users DN, Username LDAP attribute, RDN LDAP attribute, and other basic configuration"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Setup Attribute Mappers",
+          "text": "Create attribute mappers for desired AD fields like username, email, firstName, lastName"
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Configure Role Mapping",
+          "text": "Map AD groups to Keycloak roles for granular access controls"
+        }
+      ]
+    },
+    "inLanguage": ["de", "en"],
+    "isAccessibleForFree": true,
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "IT Professionals, DevOps Engineers, System Administrators"
+    }
+  }
+  </script>
+</head>
+
+<body data-lang="de">
+
+  <!-- Language Toggle -->
+  <div class="language-toggle">
+    <button class="lang-btn lang-de active" onclick="setLanguage('de')" title="Deutsch"></button>
+    <button class="lang-btn lang-en" onclick="setLanguage('en')" title="English"></button>
+  </div>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="../../src/assets/images/DPicillo.png" alt="David Picillo - Cloud DevOps Engineer Profile Picture" width="80" height="80" loading="eager" fetchpriority="high">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="David Picillo">David Picillo</h1>
+
+          <p class="title">
+            <span class="de-text">Cloud DevOps Engineer</span>
+            <span class="en-text">Cloud DevOps Engineer</span>
+          </p>
+          
+          <div class="contact-header" data-sidebar-btn>
+            <span class="de-text">Kontakte anzeigen</span>
+            <span class="en-text">Show Contacts</span>
+            <ion-icon name="chevron-down"></ion-icon>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <a href="mailto:david@picillo.de" class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </a>
+
+            <div class="contact-info">
+              <p class="contact-title">
+                <span class="de-text">E-Mail</span>
+                <span class="en-text">Email</span>
+              </p>
+
+              <a href="mailto:david@picillo.de" class="contact-link">david@picillo.de</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">
+                <span class="de-text">Geburtstag</span>
+                <span class="en-text">Birthday</span>
+              </p>
+
+              <time datetime="2002-11-01">
+                <span class="de-text">November 2002</span>
+                <span class="en-text">November 2002</span>
+              </time>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <a href="https://www.google.com/maps/search/Köln,+Deutschland" target="_blank" rel="noopener" class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </a>
+
+            <div class="contact-info">
+              <p class="contact-title">
+                <span class="de-text">Standort</span>
+                <span class="en-text">Location</span>
+              </p>
+
+              <address>
+                <span class="de-text">Köln, Deutschland</span>
+                <span class="en-text">Cologne, Germany</span>
+              </address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://linkedin.com/in/david-picillo" class="social-link" target="_blank" rel="noopener">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://github.com/dpicillo" class="social-link" target="_blank" rel="noopener">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://xing.com/profile/David_Picillo" class="social-link" target="_blank" rel="noopener">
+              <ion-icon name="briefcase-outline"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #ARTICLE
+      -->
+
+      <article class="about active" data-page="article">
+        
+        <a href="../../index.html#blog" class="back-button">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          <span class="de-text">Zurück zum Blog</span>
+          <span class="en-text">Back to Blog</span>
+        </a>
+
+        <header>
+          <div class="article-meta">
+            <span class="de-text">Identity and Access Management • 15. Januar 2025</span>
+            <span class="en-text">Identity and Access Management • January 15, 2025</span>
+          </div>
+          <h2 class="h2 article-title">
+            <span class="de-text">Keycloak User Federation mit Active Directory</span>
+            <span class="en-text">Keycloak User Federation with Active Directory</span>
+          </h2>
+          <p class="article-subtitle">
+            <span class="de-text">Implementierung einer nahtlosen LDAP-Integration für einheitliches Identity Management</span>
+            <span class="en-text">Implementation of seamless LDAP integration for unified Identity Management</span>
+          </p>
+          
+          <div class="tag-list">
+            <span class="tag">Keycloak</span>
+            <span class="tag">Active Directory</span>
+            <span class="tag">LDAP</span>
+            <span class="tag">SSO</span>
+            <span class="tag">IAM</span>
+            <span class="tag">Identity Management</span>
+          </div>
+        </header>
+
+        <section class="section">
+          <h2>
+            <span class="de-text">Überblick</span>
+            <span class="en-text">Overview</span>
+          </h2>
+          <p class="de-text">
+            Die Integration von Keycloak mit Active Directory durch User Federation ermöglicht es Unternehmen, 
+            ihre bestehende AD-Infrastruktur zu nutzen und gleichzeitig moderne Identity Management-Funktionen 
+            bereitzustellen. In diesem Artikel erkläre ich die praktische Implementierung einer solchen Lösung.
+          </p>
+          <p class="en-text">
+            Integrating Keycloak with Active Directory through User Federation enables organizations to 
+            leverage their existing AD infrastructure while providing modern Identity Management capabilities. 
+            This article explains the practical implementation of such a solution.
+          </p>
+          
+          <div class="highlight">
+            <strong class="de-text">Ziel - Single Sign-On (SSO):</strong><strong class="en-text">Goal - Single Sign-On (SSO):</strong>
+            <span class="de-text">Bestehende AD-Benutzer sollen sich nahtlos mit ihren gewohnten Zugangsdaten bei Keycloak-geschützten Anwendungen
+            anmelden können, ohne dass neue Accounts erstellt werden müssen. Eine zentrale IAM-Lösung für alle Anwendungen.</span>
+            <span class="en-text">Existing AD users should be able to seamlessly authenticate with their familiar credentials in Keycloak-protected applications
+            without requiring new account creation. A centralized IAM solution for all applications.</span>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>
+            <span class="de-text">Architektur-Übersicht</span>
+            <span class="en-text">Architecture Overview</span>
+          </h2>
+          <div class="diagram-container">
+            <img src="../../src/assets/diagrams/keycloak-ad-architecture.svg" alt="Keycloak Active Directory Integration Architecture Diagram showing LDAP User Federation Authentication Flow" width="800" height="600" loading="lazy" />
+            <p><em>
+              <span class="de-text">Architektur der Keycloak-Active Directory Integration</span>
+              <span class="en-text">Keycloak-Active Directory Integration Architecture</span>
+            </em></p>
+          </div>
+          
+          <p class="de-text">
+            Die Architektur zeigt den Datenfluss zwischen den verschiedenen Komponenten:
+          </p>
+          <p class="en-text">
+            The architecture shows the data flow between the various components:
+          </p>
+          <ul>
+            <li><strong class="de-text">Anwendungen</strong><strong class="en-text">Applications</strong> 
+              <span class="de-text">authentifizieren sich über OIDC/SAML bei Keycloak</span>
+              <span class="en-text">authenticate via OIDC/SAML with Keycloak</span>
+            </li>
+            <li><strong>Keycloak</strong> 
+              <span class="de-text">fungiert als Identity Provider und vermittelt zwischen Apps und AD</span>
+              <span class="en-text">acts as Identity Provider and mediates between Apps and AD</span>
+            </li>
+            <li><strong>Active Directory</strong> 
+              <span class="de-text">bleibt die zentrale Benutzerverwaltung</span>
+              <span class="en-text">remains the central user management system</span>
+            </li>
+            <li><strong class="de-text">LDAP-Protokoll</strong><strong class="en-text">LDAP Protocol</strong> 
+              <span class="de-text">ermöglicht die Kommunikation zwischen Keycloak und AD</span>
+              <span class="en-text">enables communication between Keycloak and AD</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2>
+            <span class="de-text">Konfiguration der User Federation</span>
+            <span class="en-text">User Federation Configuration</span>
+          </h2>
+          
+          <h3>
+            <span class="de-text">1. LDAP Provider erstellen</span>
+            <span class="en-text">1. Create LDAP Provider</span>
+          </h3>
+          <p class="de-text">Navigieren Sie in der Keycloak Admin Console zu "User Federation" und erstellen Sie einen neuen LDAP Provider:</p>
+          <p class="en-text">Navigate in the Keycloak Admin Console to "User Federation" and create a new LDAP Provider:</p>
+          
+          <div class="code-block">
+            <pre>Console Path: Realm → User Federation → Add Provider → LDAP
+
+Connection URL: ldaps://dc1.example.com:636
+Bind DN: CN=keycloak-svc,OU=Service Accounts,DC=example,DC=com
+Bind Credential: [Service Account Password]</pre>
+          </div>
+
+          <h3>
+            <span class="de-text">2. Basis-Konfiguration</span>
+            <span class="en-text">2. Basic Configuration</span>
+          </h3>
+          <div class="code-block">
+            <pre># LDAP Settings
+Users DN: OU=Users,DC=example,DC=com
+Username LDAP attribute: sAMAccountName
+RDN LDAP attribute: cn
+UUID LDAP attribute: objectGUID
+User Object Classes: person, organizationalPerson, user
+
+# Connection Settings
+Connection Timeout: 5000
+Read Timeout: 10000
+Connection Pooling: true
+Pagination: true</pre>
+          </div>
+
+          <h3>
+            <span class="de-text">3. Mapper-Konfiguration</span>
+            <span class="en-text">3. Mapper Configuration</span>
+          </h3>
+          <p class="de-text">Erstellen Sie Attribut-Mapper für die gewünschten AD-Felder:</p>
+          <p class="en-text">Create attribute mappers for the desired AD fields:</p>
+          
+          <div class="code-block">
+            <pre># Standard Mapper
+- username → sAMAccountName
+- email → mail  
+- firstName → givenName
+- lastName → sn
+
+# Gruppen Mapper
+Name: group-ldap-mapper
+Mapper Type: group-ldap-mapper
+LDAP Groups DN: OU=Groups,DC=example,DC=com
+Group Object Classes: group
+Group Name LDAP Attribute: cn</pre>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>
+            <span class="de-text">Erweiterte Funktionen</span>
+            <span class="en-text">Advanced Features</span>
+          </h2>
+          
+          <h3>
+            <span class="de-text">Rollenbasierte Zugriffskontrolle</span>
+            <span class="en-text">Role-based Access Control</span>
+          </h3>
+
+          <h4 style="color: var(--white-2); margin: 20px 0 10px 0;">
+            <span class="de-text">Option 1: Automatische Rollenzuweisung basierend auf AD-Gruppen</span>
+            <span class="en-text">Option 1: Automatic Role Assignment Based on AD Groups</span>
+          </h4>
+          
+          <p class="de-text">
+            <strong>Voraussetzungen für Option 1:</strong> Stellen Sie sicher, dass die Benutzerrollen auf dem LDAP-Server wie folgt repräsentiert sind:
+          </p>
+          <p class="en-text">
+            <strong>Prerequisites for Option 1:</strong> Ensure that user roles are represented on the LDAP server as follows:
+          </p>
+          
+          <ul>
+            <li class="de-text">Eine Organisationseinheit (OU), z.B. "Roles" oder "Groups"</li>
+            <li class="en-text">An organizational unit (OU), e.g., "Roles" or "Groups"</li>
+            <li class="de-text">Gruppen unter dieser Einheit, die die individuellen Benutzerrollen repräsentieren</li>
+            <li class="en-text">Groups under this unit representing individual user roles</li>
+            <li class="de-text">Das cn-Attribut der Gruppen entspricht den Namen der Keycloak-Rollen</li>
+            <li class="en-text">The cn attribute of groups matches Keycloak role names</li>
+            <li class="de-text">Benutzer werden über das member-Attribut zu diesen Gruppen hinzugefügt</li>
+            <li class="en-text">Users are added to groups via the member attribute</li>
+          </ul>
+          
+          <div class="code-block">
+            <pre># Option 1: Automatische Rollenzuweisung
+# 1. In Keycloak: User Federation → Mappers → Add mapper
+
+Mapper Name: ad-role-mapper
+Mapper Type: role-ldap-mapper
+LDAP Roles DN: OU=Roles,DC=example,DC=com
+Role Name LDAP Attribute: cn
+Role Object Classes: group
+Membership User LDAP Attribute: sAMAccountName
+Membership LDAP Attribute: member
+Mode: IMPORT</pre>
+          </div>
+
+          <h4 style="color: var(--white-2); margin: 20px 0 10px 0;">
+            <span class="de-text">Option 2: Standard-Rolle für alle LDAP-Benutzer</span>
+            <span class="en-text">Option 2: Default Role for All LDAP Users</span>
+          </h4>
+          
+          <p class="de-text">
+            Falls die AD-Gruppen nicht den Keycloak-Rollennamen entsprechen, verwenden Sie einen Standard-Mapper, der allen LDAP-Benutzern eine Platzhalterrolle zuweist:
+          </p>
+          <p class="en-text">
+            If AD groups don't match Keycloak role names, use a default mapper that assigns a placeholder role to all LDAP users:
+          </p>
+          
+          <div class="code-block">
+            <pre># Option 2: Standard-Rollenzuweisung
+# 1. In Keycloak: User Federation → Mappers → Add mapper
+
+Mapper Name: default-role-mapper
+Mapper Type: hardcoded-ldap-role-mapper
+Role: default-user-role
+</pre>
+          </div>
+
+          <div class="highlight">
+            <strong class="de-text">Wichtiger Hinweis:</strong><strong class="en-text">Important Note:</strong>
+            <span class="de-text">Bei Option 2 erhalten LDAP-Benutzer zunächst nur eine Standard-/Platzhalterrolle. Ein Keycloak-Administrator muss ihre Rolle manuell in der Benutzerverwaltung anpassen, bevor sie das System vollständig nutzen können.</span>
+            <span class="en-text">With Option 2, LDAP users initially receive only a default/placeholder role. A Keycloak administrator must manually adjust their role in user management before they can fully use the system.</span>
+          </div>
+
+          <h3>Password Sync</h3>
+          <div class="highlight">
+            <strong class="de-text">Hinweis:</strong><strong class="en-text">Note:</strong>
+            <span class="de-text">Bei AD-Integration wird empfohlen, Passwort-Updates weiterhin über AD durchzuführen 
+            und Keycloak im READ_ONLY Modus zu betreiben.</span>
+            <span class="en-text">For AD integration, it is recommended to continue password updates through AD 
+            and operate Keycloak in READ_ONLY mode.</span>
+          </div>
+        </section>
+
+        <section class="section">
+          <h2>Troubleshooting</h2>
+          
+          <h3>
+            <span class="de-text">Häufige Probleme</span>
+            <span class="en-text">Common Issues</span>
+          </h3>
+          <ul>
+            <li><strong>LDAP Connection Failed:</strong> 
+              <span class="de-text">Überprüfen Sie Firewall-Regeln und Zertifikate</span>
+              <span class="en-text">Check firewall rules and certificates</span>
+            </li>
+            <li><strong>User Import Issues:</strong> 
+              <span class="de-text">Validieren Sie die Users DN und Object Classes</span>
+              <span class="en-text">Validate Users DN and Object Classes</span>
+            </li>
+            <li><strong>Group Mapping Fehler:</strong> 
+              <span class="de-text">Stellen Sie sicher, dass der Service Account Lesezugriff auf Gruppen hat</span>
+              <span class="en-text">Ensure the Service Account has read access to groups</span>
+            </li>
+            <li><strong>Performance Probleme:</strong> 
+              <span class="de-text">Aktivieren Sie Connection Pooling und Pagination</span>
+              <span class="en-text">Enable Connection Pooling and Pagination</span>
+            </li>
+          </ul>
+
+        </section>
+
+        <section class="section">
+          <h2>Best Practices</h2>
+          <ul>
+            <li><strong class="de-text">Service Account:</strong><strong class="en-text">Service Account:</strong> 
+              <span class="de-text">Verwenden Sie einen dedizierten Service Account mit minimalen Berechtigungen</span>
+              <span class="en-text">Use a dedicated Service Account with minimal permissions</span>
+            </li>
+            <li><strong>SSL/TLS:</strong> 
+              <span class="de-text">Nutzen Sie immer verschlüsselte LDAPS-Verbindungen</span>
+              <span class="en-text">Always use encrypted LDAPS connections</span>
+            </li>
+            <li><strong>Caching:</strong> 
+              <span class="de-text">Konfigurieren Sie angemessene Cache-Einstellungen für bessere Performance</span>
+              <span class="en-text">Configure appropriate cache settings for better performance</span>
+            </li>
+            <li><strong>Monitoring:</strong> 
+              <span class="de-text">Implementieren Sie Überwachung für LDAP-Verbindungen und Sync-Prozesse</span>
+              <span class="en-text">Implement monitoring for LDAP connections and sync processes</span>
+            </li>
+            <li><strong>Testing:</strong> 
+              <span class="de-text">Testen Sie die Integration mit verschiedenen AD-Gruppenmitgliedschaften</span>
+              <span class="en-text">Test the integration with various AD group memberships</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="section">
+          <h2>
+            <span class="de-text">Fazit</span>
+            <span class="en-text">Conclusion</span>
+          </h2>
+          <p class="de-text">
+            Die Integration von Keycloak mit Active Directory über User Federation bietet eine elegante Lösung 
+            für hybride Identity Management-Szenarien. Durch die zentrale Verwaltung in AD bleiben bestehende 
+            Prozesse erhalten, während moderne SSO-Funktionen für neue Anwendungen verfügbar werden.
+          </p>
+          <p class="en-text">
+            Integrating Keycloak with Active Directory via User Federation provides an elegant solution 
+            for hybrid Identity Management scenarios. Central management in AD preserves existing 
+            processes while making modern SSO features available for new applications.
+          </p>
+          
+          <p class="de-text">
+            Diese Architektur bildet eine solide Grundlage für die schrittweise Migration zu cloud-nativen 
+            Identity-Lösungen, ohne bestehende Workflows zu unterbrechen.
+          </p>
+          <p class="en-text">
+            This architecture forms a solid foundation for gradual migration to cloud-native 
+            identity solutions without disrupting existing workflows.
+          </p>
+        </section>
+
+      </article>
+
+    </div>
+
+  </main>
+
+  
+  <!-- Language Toggle Script -->
+  <script>
+    function setLanguage(lang) {
+      document.body.setAttribute('data-lang', lang);
+      
+      // Update active button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector('.lang-' + lang).classList.add('active');
+      
+      // Store preference
+      localStorage.setItem('preferred-language', lang);
+    }
+    
+    // Load saved language preference or detect browser language
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedLang = localStorage.getItem('preferred-language');
+      
+      if (savedLang) {
+        setLanguage(savedLang);
+      } else {
+        // Detect browser language
+        const browserLang = navigator.language || navigator.userLanguage;
+        const defaultLang = browserLang.startsWith('de') ? 'de' : 'en';
+        setLanguage(defaultLang);
+      }
+    });
+  </script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="../../src/scripts/ionicons.esm.js"></script>
+  <script nomodule src="../../src/scripts/ionicons.js"></script>
+
+</body>
+
+</html>

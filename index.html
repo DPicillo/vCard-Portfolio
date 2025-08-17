@@ -119,23 +119,30 @@
   <style>
     .language-toggle {
       position: fixed;
-      top: 20px;
-      right: 20px;
+      top: 10px;
+      right: 10px;
       display: flex;
-      gap: 8px;
+      gap: 4px;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 8px;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(10px);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+    
+    .language-toggle:hover {
+      opacity: 1;
+      transform: scale(1.05);
     }
     
     .lang-btn {
-      width: 40px;
-      height: 30px;
-      border: 2px solid transparent;
-      border-radius: 6px;
+      width: 28px;
+      height: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
       cursor: pointer;
       transition: all 0.3s ease;
       background-size: cover;
@@ -144,11 +151,11 @@
     
     .lang-btn.active {
       border-color: #F97316;
-      box-shadow: 0 2px 8px rgba(249, 115, 22, 0.3);
+      box-shadow: 0 1px 4px rgba(249, 115, 22, 0.3);
     }
     
     .lang-btn:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
     
     .lang-de {
@@ -157,6 +164,36 @@
     
     .lang-en {
       background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjQjIyMjM0Ii8+CjxyZWN0IHk9IjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSI2IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMTAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIxNCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHk9IjE4IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIyNiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHdpZHRoPSIxNiIgaGVpZ2h0PSIxNCIgZmlsbD0iIzNCNEE5QSIvPgo8L3N2Zz4K');
+    }
+    
+    /* Hide language toggle on small screens initially, show on hover of top area */
+    @media (max-width: 580px) {
+      .language-toggle {
+        opacity: 0.4;
+        transform: scale(0.8);
+        top: 5px;
+        right: 5px;
+      }
+      
+      .language-toggle:hover {
+        opacity: 1;
+        transform: scale(1);
+      }
+      
+      .lang-btn {
+        width: 24px;
+        height: 16px;
+      }
+    }
+    
+    /* Better positioning on larger screens */
+    @media (min-width: 1250px) {
+      .language-toggle {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        opacity: 0.8;
+      }
     }
     
     [data-lang="en"] .de-text { display: none; }
@@ -214,7 +251,7 @@
       <div class="sidebar-info">
 
         <figure class="avatar-box">
-          <img src="./src/assets/images/DPicillo.png" alt="David Picillo" width="80">
+          <img src="./src/assets/images/DPicillo.png" alt="David Picillo - Cloud DevOps Engineer Profile Picture" width="80" height="80" loading="eager" fetchpriority="high">
         </figure>
 
         <div class="info-content">
@@ -224,14 +261,13 @@
             <span class="de-text">Cloud DevOps Engineer</span>
             <span class="en-text">Cloud DevOps Engineer</span>
           </p>
+          
+          <div class="contact-header" data-sidebar-btn>
+            <span class="de-text">Kontakte anzeigen</span>
+            <span class="en-text">Show Contacts</span>
+            <ion-icon name="chevron-down"></ion-icon>
+          </div>
         </div>
-
-        <button class="info_more-btn" data-sidebar-btn>
-          <span class="de-text">Kontakte anzeigen</span>
-          <span class="en-text">Show Contacts</span>
-
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
 
       </div>
 
@@ -362,7 +398,10 @@
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Portfolio</button>
+            <button class="navbar-link" data-nav-link>
+              <span class="de-text">Blog</span>
+              <span class="en-text">Blog</span>
+            </button>
           </li>
 
 
@@ -389,14 +428,14 @@
 
         <section class="about-text">
           <p class="de-text">
-            Nach meinem Abschluss als Fachinformatiker Systemintegration bei OBI Services habe ich bei OBI Smart Technologies GmbH eine Karriere als DevOps Engineer begonnen. Meine Kernkompetenzen umfassen Cloud-Technologien, insbesondere Amazon Web Services (AWS) und die Verwaltung von Kubernetes-Clustern.
+            Nach meinem Abschluss als Fachinformatiker für Systemintegration bei OBI Services habe ich bei OBI Smart Technologies GmbH eine Karriere als DevOps Engineer begonnen. Meine Kernkompetenzen umfassen Cloud-Technologien, insbesondere Amazon Web Services (AWS) und die Verwaltung von Kubernetes-Clustern.
           </p>
           <p class="en-text">
             After completing my training as an IT Systems Integration Specialist at OBI Services, I began a career as a DevOps Engineer at OBI Smart Technologies GmbH. My core competencies include cloud technologies, particularly Amazon Web Services (AWS) and the management of Kubernetes clusters.
           </p>
 
           <p class="de-text">
-            In meiner aktuellen Rolle als Cloud DevOps Engineer unterstütze ich bei der Weiterentwicklung unserer Cloud-Plattform. Ich spezialisiere mich auf Infrastructure as Code, Container-Orchestrierung und die Implementierung von CI/CD-Pipelines für moderne Cloud-native Anwendungen.
+            In meiner aktuellen Rolle als Cloud DevOps Engineer unterstütze ich die Weiterentwicklung unserer Cloud-Plattform. Ich spezialisiere mich auf Infrastructure as Code, Container-Orchestrierung und die Implementierung von CI/CD-Pipelines für moderne cloud-native Anwendungen.
           </p>
           <p class="en-text">
             In my current role as a Cloud DevOps Engineer, I support the development of our cloud platform. I specialize in Infrastructure as Code, container orchestration, and the implementation of CI/CD pipelines for modern cloud-native applications.
@@ -420,17 +459,17 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./src/assets/images/icon-dev.svg" alt="cloud icon" width="40">
+                <img src="./src/assets/images/icon-dev.svg" alt="Cloud Infrastructure AWS DevOps Services Icon" width="40" height="40" loading="lazy">
               </div>
 
               <div class="service-content-box">
                 <h4 class="h4 service-item-title">
-                  <span class="de-text">Cloud Infrastructure</span>
+                  <span class="de-text">Cloud-Infrastruktur</span>
                   <span class="en-text">Cloud Infrastructure</span>
                 </h4>
 
                 <p class="service-item-text">
-                  <span class="de-text">Professionelle Verwaltung und Skalierung von AWS Cloud-Infrastrukturen mit modernen DevOps-Praktiken.</span>
+                  <span class="de-text">Professionelle Verwaltung und Skalierung von AWS-Cloud-Infrastrukturen mit modernen DevOps-Praktiken.</span>
                   <span class="en-text">Professional management and scaling of AWS cloud infrastructures with modern DevOps practices.</span>
                 </p>
               </div>
@@ -440,17 +479,17 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./src/assets/images/icon-app.svg" alt="kubernetes icon" width="40">
+                <img src="./src/assets/images/icon-app.svg" alt="Kubernetes Administration Container Orchestration Icon" width="40" height="40" loading="lazy">
               </div>
 
               <div class="service-content-box">
                 <h4 class="h4 service-item-title">
-                  <span class="de-text">Kubernetes Administration</span>
+                  <span class="de-text">Kubernetes-Administration</span>
                   <span class="en-text">Kubernetes Administration</span>
                 </h4>
 
                 <p class="service-item-text">
-                  <span class="de-text">Verwaltung und Orchestrierung von Container-Clustern sowohl On-Premise als auch in der Cloud (EKS).</span>
+                  <span class="de-text">Verwaltung und Orchestrierung von Container-Clustern sowohl on-premise als auch in der Cloud (EKS).</span>
                   <span class="en-text">Management and orchestration of container clusters both on-premise and in the cloud (EKS).</span>
                 </p>
               </div>
@@ -460,7 +499,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./src/assets/images/icon-design.svg" alt="automation icon" width="40">
+                <img src="./src/assets/images/icon-design.svg" alt="CI/CD Automation Infrastructure as Code Icon" width="40" height="40" loading="lazy">
               </div>
 
               <div class="service-content-box">
@@ -470,7 +509,7 @@
                 </h4>
 
                 <p class="service-item-text">
-                  <span class="de-text">Implementierung von automatisierten Deployment-Pipelines und Infrastructure as Code mit Terraform.</span>
+                  <span class="de-text">Implementierung von automatisierten Deployment-Pipelines und Infrastructure-as-Code mit Terraform.</span>
                   <span class="en-text">Implementation of automated deployment pipelines and Infrastructure as Code with Terraform.</span>
                 </p>
               </div>
@@ -480,7 +519,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./src/assets/images/icon-photo.svg" alt="Monitoring and Logging Services Icon" width="40" height="40" loading="lazy">
+                <img src="./src/assets/images/icon-photo.svg" alt="Monitoring Logging Observability Prometheus Grafana Icon" width="40" height="40" loading="lazy">
               </div>
 
               <div class="service-content-box">
@@ -490,7 +529,7 @@
                 </h4>
 
                 <p class="service-item-text">
-                  <span class="de-text">Aufbau und Wartung von Logging-, Tracing- und Monitoring-Systemen für Cloud-native Anwendungen.</span>
+                  <span class="de-text">Aufbau und Wartung von Logging-, Tracing- und Monitoring-Systemen für cloud-native Anwendungen.</span>
                   <span class="en-text">Setup and maintenance of logging, tracing, and monitoring systems for cloud-native applications.</span>
                 </p>
               </div>
@@ -521,96 +560,6 @@
             <span class="en-text">Resume</span>
           </h2>
         </header>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">
-              <span class="de-text">Bildung</span>
-              <span class="en-text">Education</span>
-            </h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">AWS Certified Solutions Architect - Professional</h4>
-
-              <span>August 2024</span>
-
-              <p class="timeline-text">
-                <span class="de-text">Zertifizierung für fortgeschrittene AWS-Architektur und Cloud-Lösungsdesign. Zertifikats-ID: 1cef1aad1aac476f8b74fe71a661b65b</span>
-                <span class="en-text">Advanced AWS architecture and cloud solution design certification. Certificate ID: 1cef1aad1aac476f8b74fe71a661b65b</span>
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Certified Kubernetes Administrator (CKA)</h4>
-
-              <span>November 2023</span>
-
-              <p class="timeline-text">
-                <span class="de-text">Linux Foundation Zertifizierung für Kubernetes Cluster Administration. Zertifikats-ID: LF-9fr7eqizs9</span>
-                <span class="en-text">Linux Foundation certification for Kubernetes Cluster Administration. Certificate ID: LF-9fr7eqizs9</span>
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">ITIL® Foundation Certificate</h4>
-
-              <span>Mai 2023</span>
-
-              <p class="timeline-text">
-                <span class="de-text">IT Service Management Foundation Zertifizierung von PeopleCert. Gültig bis Mai 2026.</span>
-                <span class="en-text">IT Service Management Foundation certification from PeopleCert. Valid until May 2026.</span>
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">LPIC-1 Linux Professional</h4>
-
-              <span>März 2023</span>
-
-              <p class="timeline-text">
-                <span class="de-text">Linux Professional Institute Zertifizierung Level 1. Gültig bis März 2028.</span>
-                <span class="en-text">Linux Professional Institute certification Level 1. Valid until March 2028.</span>
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">
-                <span class="de-text">Fachinformatiker Systemintegration</span>
-                <span class="en-text">IT Systems Integration Specialist</span>
-              </h4>
-
-              <span>
-                <span class="de-text">2019 — Juni 2022</span>
-                <span class="en-text">2019 — June 2022</span>
-              </span>
-
-              <p class="timeline-text">
-                <span class="de-text">Ausbildung bei OBI Services mit Abschluss bei der IHK Köln. Schwerpunkt auf Systemintegration und IT-Infrastruktur.</span>
-                <span class="en-text">Training at OBI Services with graduation from IHK Cologne. Focus on system integration and IT infrastructure.</span>
-              </p>
-
-            </li>
-
-          </ol>
-
-        </section>
 
         <section class="timeline">
 
@@ -653,7 +602,7 @@
               </span>
 
               <p class="timeline-text">
-                <span class="de-text">OBI Smart Technologies GmbH, Köln (Hybrid). Kubernetes Cluster Administration (Cloud - EKS), Logging, Tracing und Monitoring, Cloud Platform Engineering.</span>
+                <span class="de-text">OBI Smart Technologies GmbH, Köln (Hybrid). Kubernetes-Cluster-Administration (Cloud - EKS), Logging, Tracing und Monitoring, Cloud Platform Engineering.</span>
                 <span class="en-text">OBI Smart Technologies GmbH, Cologne (Hybrid). Kubernetes Cluster Administration (Cloud - EKS), logging, tracing and monitoring, Cloud Platform Engineering.</span>
               </p>
 
@@ -669,7 +618,7 @@
               </span>
 
               <p class="timeline-text">
-                <span class="de-text">OBI Smart Technologies GmbH, Wermelskirchen. Linux Serveradministration, Konzeptionierung und Lifecycle Management, 3rd-Level-Support, Kubernetes Cluster Administration (On-Premise).</span>
+                <span class="de-text">OBI Smart Technologies GmbH, Wermelskirchen. Linux-Server-Administration, Konzeptionierung und Lifecycle-Management, 3rd-Level-Support, Kubernetes-Cluster-Administration (On-Premise).</span>
                 <span class="en-text">OBI Smart Technologies GmbH, Wermelskirchen. Linux server administration, conceptualization and lifecycle management, 3rd-level support, Kubernetes Cluster Administration (On-Premise).</span>
               </p>
 
@@ -717,6 +666,96 @@
 
         </section>
 
+        <section class="timeline">
+
+          <div class="title-wrapper">
+            <div class="icon-box">
+              <ion-icon name="book-outline"></ion-icon>
+            </div>
+
+            <h3 class="h3">
+              <span class="de-text">Bildung</span>
+              <span class="en-text">Education</span>
+            </h3>
+          </div>
+
+          <ol class="timeline-list">
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">AWS Certified Solutions Architect - Professional</h4>
+
+              <span>August 2024</span>
+
+              <p class="timeline-text">
+                <span class="de-text">Zertifizierung für fortgeschrittene AWS-Architektur und Cloud-Lösungsdesign. Zertifikats-ID: 1cef1aad1aac476f8b74fe71a661b65b</span>
+                <span class="en-text">Advanced AWS architecture and cloud solution design certification. Certificate ID: 1cef1aad1aac476f8b74fe71a661b65b</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">Certified Kubernetes Administrator (CKA)</h4>
+
+              <span>November 2023</span>
+
+              <p class="timeline-text">
+                <span class="de-text">Linux Foundation-Zertifizierung für Kubernetes-Cluster-Administration. Zertifikats-ID: LF-9fr7eqizs9</span>
+                <span class="en-text">Linux Foundation certification for Kubernetes Cluster Administration. Certificate ID: LF-9fr7eqizs9</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">ITIL® Foundation Certificate</h4>
+
+              <span>Mai 2023</span>
+
+              <p class="timeline-text">
+                <span class="de-text">IT Service Management Foundation-Zertifizierung von PeopleCert. Gültig bis Mai 2026.</span>
+                <span class="en-text">IT Service Management Foundation certification from PeopleCert. Valid until May 2026.</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">LPIC-1 Linux Professional</h4>
+
+              <span>März 2023</span>
+
+              <p class="timeline-text">
+                <span class="de-text">Linux Professional Institute-Zertifizierung Level 1. Gültig bis März 2028.</span>
+                <span class="en-text">Linux Professional Institute certification Level 1. Valid until March 2028.</span>
+              </p>
+
+            </li>
+
+            <li class="timeline-item">
+
+              <h4 class="h4 timeline-item-title">
+                <span class="de-text">Fachinformatiker für Systemintegration</span>
+                <span class="en-text">IT Systems Integration Specialist</span>
+              </h4>
+
+              <span>
+                <span class="de-text">2019 — Juni 2022</span>
+                <span class="en-text">2019 — June 2022</span>
+              </span>
+
+              <p class="timeline-text">
+                <span class="de-text">Ausbildung bei OBI Services mit Abschluss bei der IHK Köln. Schwerpunkt auf Systemintegration und IT-Infrastruktur.</span>
+                <span class="en-text">Training at OBI Services with graduation from IHK Cologne. Focus on system integration and IT infrastructure.</span>
+              </p>
+
+            </li>
+
+          </ol>
+
+        </section>
+
         <section class="skill">
 
           <h3 class="h3 skills-title">
@@ -726,12 +765,12 @@
 
           <div class="skills-grid content-card">
             <div class="skill-tag expert">Amazon Web Services (AWS)</div>
+            <div class="skill-tag intermediate">Google Cloud Platform (GCP)</div>
             <div class="skill-tag expert">Kubernetes</div>
-            <div class="skill-tag advanced">Linux Administration</div>
             <div class="skill-tag advanced">Docker</div>
+            <div class="skill-tag advanced">Identity and Access Management</div>
             <div class="skill-tag advanced">Terraform</div>
             <div class="skill-tag advanced">GitLab CI/CD</div>
-            <div class="skill-tag intermediate">Google Cloud Platform (GCP)</div>
             <div class="skill-tag intermediate">Python</div>
             <div class="skill-tag intermediate">Ansible</div>
           </div>
@@ -748,17 +787,105 @@
         - #PORTFOLIO
       -->
 
-      <article class="portfolio" data-page="portfolio">
+      <article class="blog" data-page="blog">
 
         <header>
-          <h2 class="h2 article-title">Portfolio</h2>
+          <h2 class="h2 article-title">
+            <span class="de-text">Technischer Blog</span>
+            <span class="en-text">Technical Blog</span>
+          </h2>
         </header>
 
-        <section class="projects">
+        <section class="service blog">
 
-          <div style="text-align: center; padding: 60px 20px; color: var(--light-gray); font-size: var(--fs-3); font-weight: var(--fw-500);">
-            TBD
-          </div>
+          <h3 class="h3 service-title">
+            <span class="de-text">Meine technischen Beiträge</span>
+            <span class="en-text">My Technical Contributions</span>
+          </h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+              <a href="./blog/keycloak-active-directory/" class="service-link">
+                <div class="service-icon-box">
+                  <img src="./src/assets/images/icon-dev.svg" alt="Keycloak Active Directory Integration" width="40">
+                </div>
+
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">
+                    <span class="de-text">Keycloak & Active Directory Integration</span>
+                    <span class="en-text">Keycloak & Active Directory Integration</span>
+                  </h4>
+
+                  <p class="service-item-text">
+                    <span class="de-text">Umfassender Leitfaden zur Integration von Keycloak mit Active Directory über LDAP User Federation für Single Sign-On und Identity Management.</span>
+                    <span class="en-text">Comprehensive guide to integrating Keycloak with Active Directory using LDAP User Federation for Single Sign-On and Identity Management.</span>
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="service-item">
+              <a href="#" class="service-link" onclick="return false;" style="opacity: 0.5; cursor: not-allowed;">
+                <div class="service-icon-box">
+                  <img src="./src/assets/images/icon-app.svg" alt="Coming Soon" width="40">
+                </div>
+
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">
+                    <span class="de-text">Kubernetes Networking Deep Dive</span>
+                    <span class="en-text">Kubernetes Networking Deep Dive</span>
+                  </h4>
+
+                  <p class="service-item-text">
+                    <span class="de-text">Detaillierte Analyse von Kubernetes-Netzwerkkonzepten, Service Mesh und CNI-Plugins. (In Vorbereitung)</span>
+                    <span class="en-text">Detailed analysis of Kubernetes networking concepts, Service Mesh, and CNI plugins. (Coming Soon)</span>
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="service-item">
+              <a href="#" class="service-link" onclick="return false;" style="opacity: 0.5; cursor: not-allowed;">
+                <div class="service-icon-box">
+                  <img src="./src/assets/images/icon-design.svg" alt="Coming Soon" width="40">
+                </div>
+
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">
+                    <span class="de-text">Terraform Best Practices für AWS</span>
+                    <span class="en-text">Terraform Best Practices for AWS</span>
+                  </h4>
+
+                  <p class="service-item-text">
+                    <span class="de-text">Bewährte Praktiken für Infrastructure as Code mit Terraform auf AWS, einschließlich Modulstruktur und State Management. (In Vorbereitung)</span>
+                    <span class="en-text">Best practices for Infrastructure as Code with Terraform on AWS, including module structure and state management. (Coming Soon)</span>
+                  </p>
+                </div>
+              </a>
+            </li>
+
+            <li class="service-item">
+              <a href="#" class="service-link" onclick="return false;" style="opacity: 0.5; cursor: not-allowed;">
+                <div class="service-icon-box">
+                  <img src="./src/assets/images/icon-photo.svg" alt="Coming Soon" width="40">
+                </div>
+
+                <div class="service-content-box">
+                  <h4 class="h4 service-item-title">
+                    <span class="de-text">Observability mit Grafana</span>
+                    <span class="en-text">Observability with Grafana</span>
+                  </h4>
+
+                  <p class="service-item-text">
+                    <span class="de-text">Aufbau einer modernen Observability-Plattform für cloud-native Anwendungen mit Grafana, Loki und Mimir. (In Vorbereitung)</span>
+                    <span class="en-text">Building a modern observability platform for cloud-native applications with Grafana, Loki, and Mimir. (Coming Soon)</span>
+                  </p>
+                </div>
+              </a>
+            </li>
+
+          </ul>
 
         </section>
 

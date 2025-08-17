@@ -168,7 +168,7 @@ function navigateToPage(targetPage) {
     case "resume":
       navIndex = 1;
       break;
-    case "portfolio":
+    case "blog":
       navIndex = 2;
       break;
     default:
@@ -212,7 +212,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
         targetPage = "resume";
         break;
       case 2:
-        targetPage = "portfolio";
+        targetPage = "blog";
         break;
       default:
         targetPage = "about";
@@ -225,7 +225,7 @@ for (let i = 0; i < navigationLinks.length; i++) {
 // Handle hash changes (for back/forward button and direct links)
 window.addEventListener('hashchange', function() {
   const hash = window.location.hash.substring(1); // Remove the #
-  const validPages = ['about', 'resume', 'portfolio'];
+  const validPages = ['about', 'resume', 'blog'];
   
   if (validPages.includes(hash)) {
     navigateToPage(hash);
@@ -237,7 +237,7 @@ window.addEventListener('hashchange', function() {
 // Handle initial page load with hash
 window.addEventListener('load', function() {
   const hash = window.location.hash.substring(1); // Remove the #
-  const validPages = ['about', 'resume', 'portfolio'];
+  const validPages = ['about', 'resume', 'blog'];
   
   if (validPages.includes(hash)) {
     navigateToPage(hash);
