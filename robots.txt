@@ -5,6 +5,7 @@ User-agent: *
 Allow: /
 
 # Allow all search engines to crawl the site
+Allow: /blog/
 Allow: /src/
 Allow: /src/styles/
 Allow: /src/scripts/
