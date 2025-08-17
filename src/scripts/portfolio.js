@@ -157,6 +157,45 @@ if (form && formInputs.length > 0 && formBtn) {
 const navigationLinks = document.querySelectorAll("[data-nav-link]");
 const pages = document.querySelectorAll("[data-page]");
 
+// navigation function
+function navigateToPage(targetPage) {
+  // Find the nav index for the target page
+  let navIndex = 0;
+  switch(targetPage) {
+    case "about":
+      navIndex = 0;
+      break;
+    case "resume":
+      navIndex = 1;
+      break;
+    case "portfolio":
+      navIndex = 2;
+      break;
+    default:
+      navIndex = 0;
+      targetPage = "about";
+  }
+
+  // Update page visibility and navigation state
+  for (let j = 0; j < pages.length; j++) {
+    if (targetPage === pages[j].dataset.page) {
+      pages[j].classList.add("active");
+      if (navigationLinks[navIndex]) {
+        navigationLinks[navIndex].classList.add("active");
+      }
+      window.scrollTo(0, 0);
+    } else {
+      pages[j].classList.remove("active");
+      if (navigationLinks[j]) {
+        navigationLinks[j].classList.remove("active");
+      }
+    }
+  }
+
+  // Update URL hash without triggering hashchange event
+  history.replaceState(null, null, '#' + targetPage);
+}
+
 // add event to all nav link
 for (let i = 0; i < navigationLinks.length; i++) {
   navigationLinks[i].addEventListener("click", function () {
@@ -179,19 +218,33 @@ for (let i = 0; i < navigationLinks.length; i++) {
         targetPage = "about";
     }
 
-    for (let j = 0; j < pages.length; j++) {
-      if (targetPage === pages[j].dataset.page) {
-        pages[j].classList.add("active");
-        navigationLinks[navIndex].classList.add("active");
-        window.scrollTo(0, 0);
-      } else {
-        pages[j].classList.remove("active");
-        navigationLinks[j].classList.remove("active");
-      }
-    }
-
+    navigateToPage(targetPage);
   });
 }
+
+// Handle hash changes (for back/forward button and direct links)
+window.addEventListener('hashchange', function() {
+  const hash = window.location.hash.substring(1); // Remove the #
+  const validPages = ['about', 'resume', 'portfolio'];
+  
+  if (validPages.includes(hash)) {
+    navigateToPage(hash);
+  } else {
+    navigateToPage('about');
+  }
+});
+
+// Handle initial page load with hash
+window.addEventListener('load', function() {
+  const hash = window.location.hash.substring(1); // Remove the #
+  const validPages = ['about', 'resume', 'portfolio'];
+  
+  if (validPages.includes(hash)) {
+    navigateToPage(hash);
+  } else {
+    navigateToPage('about');
+  }
+});
 
 // Language toggle functionality
 function setLanguage(lang) {
