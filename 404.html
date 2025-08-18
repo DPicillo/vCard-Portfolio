@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>404 - Seite nicht gefunden | David Picillo</title>
+  <meta name="title" content="404 - Seite nicht gefunden | David Picillo">
+  <meta name="description" content="Die angeforderte Seite wurde nicht gefunden. Kehren Sie zur Startseite zurück oder nutzen Sie die Navigation.">
+  <meta name="keywords" content="404, Seite nicht gefunden, David Picillo, Cloud DevOps Engineer">
+  <meta name="author" content="David Picillo">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="language" content="de,en">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://picillo.de/404">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="David Picillo - Cloud DevOps Engineer">
+  <meta property="og:title" content="404 - Seite nicht gefunden">
+  <meta property="og:description" content="Die angeforderte Seite wurde nicht gefunden. Kehren Sie zur Startseite zurück.">
+  <meta property="og:image" content="https://picillo.de/src/assets/images/DPicillo.png">
+  <meta property="og:url" content="https://picillo.de/404">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:locale:alternate" content="en_US">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@dpicillo">
+  <meta name="twitter:creator" content="@dpicillo">
+  <meta name="twitter:title" content="404 - Seite nicht gefunden">
+  <meta name="twitter:description" content="Die angeforderte Seite wurde nicht gefunden. Kehren Sie zur Startseite zurück.">
+  <meta name="twitter:image" content="https://picillo.de/src/assets/images/DPicillo.png">
+  
+  <!-- Language Toggle Styles -->
+  <style>
+    .language-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 4px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+    
+    .language-toggle:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    
+    .lang-btn {
+      width: 28px;
+      height: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .lang-btn.active {
+      border-color: #F97316;
+      box-shadow: 0 1px 4px rgba(249, 115, 22, 0.3);
+    }
+    
+    .lang-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .lang-de {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjMDAwMDAwIi8+CjxyZWN0IHk9IjEwIiB3aWR0aD0iNDAiIGhlaWdodD0iMTAiIGZpbGw9IiNERDAwMDAiLz4KPHJlY3QgeT0iMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIxMCIgZmlsbD0iI0ZGQ0UwMCIvPgo8L3N2Zz4K');
+    }
+    
+    .lang-en {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjQjIyMjM0Ii8+CjxyZWN0IHk9IjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSI2IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMTAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIxNCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHk9IjE4IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIyNiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHdpZHRoPSIxNiIgaGVpZ2h0PSIxNCIgZmlsbD0iIzNCNEE5QSIvPgo8L3N2Zz4K');
+    }
+    
+    @media (max-width: 580px) {
+      .language-toggle {
+        opacity: 0.4;
+        transform: scale(0.8);
+        top: 5px;
+        right: 5px;
+      }
+      
+      .language-toggle:hover {
+        opacity: 1;
+        transform: scale(1);
+      }
+      
+      .lang-btn {
+        width: 24px;
+        height: 16px;
+      }
+    }
+    
+    @media (min-width: 1250px) {
+      .language-toggle {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        opacity: 0.8;
+      }
+    }
+    
+    [data-lang="en"] .de-text { display: none; }
+    [data-lang="de"] .en-text { display: none; }
+    [data-lang="en"] .en-text { display: block; }
+    [data-lang="de"] .de-text { display: block; }
+    
+    /* 404-specific styles */
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--orange-yellow-crayola);
+      text-decoration: none;
+      margin-bottom: 20px;
+      font-weight: var(--fw-500);
+      transition: all 0.3s ease;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(249, 115, 22, 0.2);
+      background: rgba(249, 115, 22, 0.05);
+    }
+    
+    .back-button:hover {
+      transform: translateX(-2px);
+      background: rgba(249, 115, 22, 0.1);
+      border-color: var(--orange-yellow-crayola);
+    }
+    
+    .error-container {
+      text-align: center;
+      padding: 60px 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .error-code {
+      font-size: 8rem;
+      font-weight: 700;
+      color: var(--orange-yellow-crayola);
+      margin: 0;
+      line-height: 1;
+      text-shadow: 0 4px 8px rgba(249, 115, 22, 0.3);
+    }
+    
+    .error-title {
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--white-2);
+      margin: 20px 0 15px 0;
+      line-height: 1.2;
+    }
+    
+    .error-description {
+      color: var(--light-gray);
+      font-size: var(--fs-4);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    
+    .error-suggestions {
+      background: var(--border-gradient-onyx);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 30px 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .error-suggestions::before {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      background: var(--bg-gradient-jet);
+      border-radius: inherit;
+      z-index: -1;
+    }
+    
+    .suggestions-title {
+      color: var(--white-2);
+      font-size: var(--fs-3);
+      font-weight: var(--fw-500);
+      margin-bottom: 15px;
+    }
+    
+    .suggestions-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .suggestions-list li {
+      color: var(--light-gray);
+      margin-bottom: 8px;
+      padding-left: 20px;
+      position: relative;
+    }
+    
+    .suggestions-list li::before {
+      content: "•";
+      color: var(--orange-yellow-crayola);
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+    
+    @media (max-width: 580px) {
+      .error-code {
+        font-size: 6rem;
+      }
+      
+      .error-title {
+        font-size: 1.5rem;
+      }
+      
+      .error-container {
+        padding: 40px 15px;
+      }
+    }
+  </style>
+
+  <!--
+    - favicon and PWA manifest
+  -->
+  <link rel="shortcut icon" href="./src/assets/images/logo.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="192x192" href="./src/assets/images/DPicillo.png">
+  <link rel="apple-touch-icon" href="./src/assets/images/DPicillo.png">
+  <link rel="manifest" href="./manifest.json">
+  
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="#F97316">
+  <meta name="msapplication-TileColor" content="#F97316">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="David Picillo - 404">
+
+  <!--
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./src/styles/main.css">
+
+  <!--
+    - google font link
+  -->
+  <link rel="stylesheet" href="./src/assets/fonts/poppins.css">
+</head>
+
+<body data-lang="de">
+
+  <!-- Language Toggle -->
+  <div class="language-toggle">
+    <button class="lang-btn lang-de active" onclick="setLanguage('de')" title="Deutsch"></button>
+    <button class="lang-btn lang-en" onclick="setLanguage('en')" title="English"></button>
+  </div>
+
+  <!--
+    - #MAIN
+  -->
+
+  <main>
+
+    <!--
+      - #SIDEBAR
+    -->
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./src/assets/images/DPicillo.png" alt="David Picillo - Cloud DevOps Engineer Profile Picture" width="80" height="80" loading="eager" fetchpriority="high">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name" title="David Picillo">David Picillo</h1>
+
+          <p class="title">
+            <span class="de-text">Cloud DevOps Engineer</span>
+            <span class="en-text">Cloud DevOps Engineer</span>
+          </p>
+          
+          <div class="contact-header" data-sidebar-btn>
+            <span class="de-text">Kontakte anzeigen</span>
+            <span class="en-text">Show Contacts</span>
+            <ion-icon name="chevron-down"></ion-icon>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+
+            <a href="mailto:david@picillo.de" class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </a>
+
+            <div class="contact-info">
+              <p class="contact-title">
+                <span class="de-text">E-Mail</span>
+                <span class="en-text">Email</span>
+              </p>
+
+              <a href="mailto:david@picillo.de" class="contact-link">david@picillo.de</a>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <div class="icon-box">
+              <ion-icon name="calendar-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">
+                <span class="de-text">Geburtstag</span>
+                <span class="en-text">Birthday</span>
+              </p>
+
+              <time datetime="2002-11-01">
+                <span class="de-text">November 2002</span>
+                <span class="en-text">November 2002</span>
+              </time>
+            </div>
+
+          </li>
+
+          <li class="contact-item">
+
+            <a href="https://www.google.com/maps/search/45277+Essen,+Deutschland" target="_blank" rel="noopener" class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </a>
+
+            <div class="contact-info">
+              <p class="contact-title">
+                <span class="de-text">Standort</span>
+                <span class="en-text">Location</span>
+              </p>
+
+              <address>
+                <span class="de-text">45277 Essen, Deutschland</span>
+                <span class="en-text">45277 Essen, Germany</span>
+              </address>
+            </div>
+
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://linkedin.com/in/david-picillo" class="social-link" target="_blank" rel="noopener">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://github.com/dpicillo" class="social-link" target="_blank" rel="noopener">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://xing.com/profile/David_Picillo" class="social-link" target="_blank" rel="noopener">
+              <ion-icon name="briefcase-outline"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+    <!--
+      - #main-content
+    -->
+
+    <div class="main-content">
+
+      <!--
+        - #404 ERROR
+      -->
+
+      <article class="about active" data-page="error">
+        
+        <a href="/" class="back-button">
+          <ion-icon name="arrow-back-outline"></ion-icon>
+          <span class="de-text">Zurück zur Startseite</span>
+          <span class="en-text">Back to Home</span>
+        </a>
+
+        <div class="error-container">
+          <h1 class="error-code">404</h1>
+          
+          <h2 class="error-title">
+            <span class="de-text">Seite nicht gefunden</span>
+            <span class="en-text">Page Not Found</span>
+          </h2>
+          
+          <p class="error-description">
+            <span class="de-text">
+              Die angeforderte Seite konnte leider nicht gefunden werden. Möglicherweise wurde sie verschoben, umbenannt oder existiert nicht mehr.
+            </span>
+            <span class="en-text">
+              The requested page could not be found. It may have been moved, renamed, or no longer exists.
+            </span>
+          </p>
+
+          <div class="error-suggestions">
+            <h3 class="suggestions-title">
+              <span class="de-text">Was können Sie tun?</span>
+              <span class="en-text">What can you do?</span>
+            </h3>
+            <ul class="suggestions-list">
+              <li>
+                <span class="de-text">Überprüfen Sie die URL auf Tippfehler</span>
+                <span class="en-text">Check the URL for typos</span>
+              </li>
+              <li>
+                <span class="de-text">Kehren Sie zur <a href="/" style="color: var(--orange-yellow-crayola);">Startseite</a> zurück</span>
+                <span class="en-text">Return to the <a href="/" style="color: var(--orange-yellow-crayola);">homepage</a></span>
+              </li>
+              <li>
+                <span class="de-text">Besuchen Sie meinen <a href="/#blog" style="color: var(--orange-yellow-crayola);">technischen Blog</a></span>
+                <span class="en-text">Visit my <a href="/#blog" style="color: var(--orange-yellow-crayola);">technical blog</a></span>
+              </li>
+              <li>
+                <span class="de-text">Kontaktieren Sie mich unter <a href="mailto:david@picillo.de" style="color: var(--orange-yellow-crayola);">david@picillo.de</a></span>
+                <span class="en-text">Contact me at <a href="mailto:david@picillo.de" style="color: var(--orange-yellow-crayola);">david@picillo.de</a></span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </article>
+
+    </div>
+
+  </main>
+
+  <!-- Language Toggle Script -->
+  <script>
+    function setLanguage(lang) {
+      document.body.setAttribute('data-lang', lang);
+      
+      // Update active button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.querySelector('.lang-' + lang).classList.add('active');
+      
+      // Store preference
+      localStorage.setItem('preferred-language', lang);
+    }
+    
+    // Load saved language preference or detect browser language
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedLang = localStorage.getItem('preferred-language');
+      
+      if (savedLang) {
+        setLanguage(savedLang);
+      } else {
+        // Detect browser language
+        const browserLang = navigator.language || navigator.userLanguage;
+        const defaultLang = browserLang.startsWith('de') ? 'de' : 'en';
+        setLanguage(defaultLang);
+      }
+    });
+  </script>
+
+  <!--
+    - ionicon link
+  -->
+  <script type="module" src="./src/scripts/ionicons.esm.js"></script>
+  <script nomodule src="./src/scripts/ionicons.js"></script>
+
+</body>
+
+</html>
