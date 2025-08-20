@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://cloudconvert.com/
+HostUrl=https://eu-central.storage.cloudconvert.com/tasks/e77cbd1b-3365-4db4-97c2-30e58900b7c9/DPicillo.ico?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=cloudconvert-production%2F20250820%2Ffra%2Fs3%2Faws4_request&X-Amz-Date=20250820T214651Z&X-Amz-Expires=86400&X-Amz-Signature=f5eb6e8d26539ae2958bcae16bfd4589457aaf90685a65147e9bd6c3e21144d5&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3D%22DPicillo.ico%22&response-content-type=image%2Fvnd.microsoft.icon&x-id=GetObject
