@@ -2,14 +2,14 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <sitemap>
-    <loc>https://david.picillo.de/de/sitemap.xml</loc>
+    <loc>http://localhost:1314/de/sitemap.xml</loc>
     
       <lastmod>2025-01-15T10:00:00+00:00</lastmod>
     
   </sitemap>
   
   <sitemap>
-    <loc>https://david.picillo.de/en/sitemap.xml</loc>
+    <loc>http://localhost:1314/en/sitemap.xml</loc>
     
       <lastmod>2025-01-15T10:00:00+00:00</lastmod>
     

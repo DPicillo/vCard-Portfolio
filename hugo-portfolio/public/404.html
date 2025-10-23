@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1314&amp;path=livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,22 +16,22 @@
   <meta name="revisit-after" content="7 days">
   
   
-  <link rel="canonical" href="https://david.picillo.de/404.html">
+  <link rel="canonical" href="http://localhost:1314/404.html">
   
   
   
-  <link rel="alternate" hreflang="de" href="https://david.picillo.de/404.html">
+  <link rel="alternate" hreflang="de" href="http://localhost:1314/404.html">
   
-  <link rel="alternate" hreflang="en" href="https://david.picillo.de/en/404.html">
+  <link rel="alternate" hreflang="en" href="http://localhost:1314/en/404.html">
   
-  <link rel="alternate" hreflang="x-default" href="https://david.picillo.de/">
+  <link rel="alternate" hreflang="x-default" href="http://localhost:1314/">
   
   
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://david.picillo.de/404.html">
+  <meta property="og:url" content="http://localhost:1314/404.html">
   <meta property="og:title" content="404 Page not found - David Picillo - Cloud DevOps Engineer">
   <meta property="og:description" content="Erfahrener Cloud DevOps Engineer mit Spezialisierung auf AWS, Kubernetes und Infrastructure as Code.">
-  <meta property="og:image" content="https://david.picillo.de/images/DPicillo.png">
+  <meta property="og:image" content="http://localhost:1314/images/DPicillo.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="David Picillo - Cloud DevOps Engineer">
@@ -40,10 +40,10 @@
   
   
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://david.picillo.de/404.html">
+  <meta property="twitter:url" content="http://localhost:1314/404.html">
   <meta property="twitter:title" content="404 Page not found - David Picillo - Cloud DevOps Engineer">
   <meta property="twitter:description" content="Erfahrener Cloud DevOps Engineer mit Spezialisierung auf AWS, Kubernetes und Infrastructure as Code.">
-  <meta property="twitter:image" content="https://david.picillo.de/images/DPicillo.png">
+  <meta property="twitter:image" content="http://localhost:1314/images/DPicillo.png">
   <meta property="twitter:image:alt" content="David Picillo - Cloud DevOps Engineer">
   
   
@@ -57,8 +57,8 @@
     "name": "David Picillo",
     "jobTitle": "Cloud DevOps Engineer",
     "description": "Erfahrener Cloud DevOps Engineer mit Spezialisierung auf AWS, Kubernetes und Infrastructure as Code.",
-    "url": "https:\/\/david.picillo.de\/",
-    "image": "https:\/\/david.picillo.de\/images/DPicillo.png",
+    "url": "http:\/\/localhost:1314\/",
+    "image": "http:\/\/localhost:1314\/images/DPicillo.png",
     "email": "david@picillo.de",
     "address": {
       "@type": "PostalAddress",
@@ -176,6 +176,158 @@
         right: 15px;
         opacity: 0.8;
       }
+    }
+    
+     
+    .blog-nav {
+      margin-bottom: 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--jet);
+    }
+    
+    .back-to-blog, .back-to-blog-footer {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--orange-yellow-crayola);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background: rgba(249, 115, 22, 0.1);
+    }
+    
+    .back-to-blog:hover, .back-to-blog-footer:hover {
+      background: rgba(249, 115, 22, 0.2);
+      transform: translateX(-4px);
+    }
+    
+    .back-arrow {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.25rem;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    
+    .back-to-blog:hover .back-arrow,
+    .back-to-blog-footer:hover .back-arrow {
+      transform: translateX(-2px);
+    }
+    
+    .blog-post-header {
+      margin-bottom: 2rem;
+    }
+    
+    .blog-post-title {
+      color: var(--white-2);
+      margin-bottom: 1rem;
+    }
+    
+    .blog-post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      color: var(--light-gray-70);
+      font-size: var(--fs-6);
+    }
+    
+    .blog-post-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .tag {
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--orange-yellow-crayola);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: var(--fs-7);
+      font-weight: 500;
+    }
+    
+    .blog-post-content {
+      color: var(--light-gray);
+      line-height: 1.8;
+    }
+    
+    .blog-post-content h2 {
+      color: var(--white-2);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .blog-post-content h3 {
+      color: var(--white-2);
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .blog-post-content h4 {
+      color: var(--orange-yellow-crayola);
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .blog-post-content p {
+      margin-bottom: 1rem;
+    }
+    
+    .blog-post-content ul, .blog-post-content ol {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    
+    .blog-post-content li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .blog-post-content blockquote {
+      border-left: 4px solid var(--orange-yellow-crayola);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      background: rgba(249, 115, 22, 0.05);
+      padding: 1rem;
+      border-radius: 4px;
+    }
+    
+    .blog-post-content code {
+      background: var(--eerie-black-2);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      color: var(--orange-yellow-crayola);
+    }
+    
+    .blog-post-content pre {
+      background: var(--eerie-black-2);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    
+    .blog-post-content pre code {
+      background: none;
+      padding: 0;
+      color: var(--light-gray);
+    }
+    
+    .blog-post-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    
+    .blog-post-footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--jet);
+      text-align: center;
     }
   </style>
 </head>
@@ -524,6 +676,117 @@
 
     </div>
   </main>
+
+  
+  <footer class="footer">
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="/impressum/" class="footer-link">
+        
+          Impressum
+        
+      </a>
+      <span class="footer-separator">|</span>
+      <a href="/impressum/" class="footer-link">
+        
+          Datenschutzerklärung
+        
+      </a>
+    </div>
+    <div class="footer-copyright">
+      <p>&copy; 2025 David Picillo. 
+        
+          Alle Rechte vorbehalten.
+        
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+.footer {
+  margin-top: 2rem;
+  padding: 3rem 0;
+  border-top: 1px solid var(--jet);
+  background: var(--eerie-black-1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 160px;
+  height: 160px;
+}
+
+.footer-content {
+  text-align: center;
+  color: var(--light-gray-70);
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  position: relative;
+}
+
+.footer-links {
+  margin-bottom: 0.8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  color: var(--light-gray-70);
+  text-decoration: none;
+  font-size: var(--fs-7);
+  transition: color 0.3s ease;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.footer-link:hover {
+  color: var(--orange-yellow-crayola);
+  background: rgba(249, 115, 22, 0.1);
+}
+
+.footer-separator {
+  color: var(--jet);
+  font-size: var(--fs-7);
+}
+
+.footer-copyright {
+  font-size: var(--fs-8);
+  color: var(--light-gray-70);
+}
+
+.footer-copyright p {
+  margin: 0;
+}
+
+@media (max-width: 580px) {
+  .footer {
+    padding: 1rem 0;
+  }
+  
+  .footer-links {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .footer-separator {
+    display: none;
+  }
+  
+  .footer-link {
+    padding: 0.5rem;
+  }
+}
+</style>
 
   
   <script type="module" src="/js/ionicons.esm.js"></script>

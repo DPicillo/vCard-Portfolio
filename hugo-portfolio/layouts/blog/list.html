@@ -21,7 +21,7 @@
 
     <ul class="service-list">
       <li class="service-item">
-        <a href="/blog/keycloak-active-directory/" class="service-link">
+        <a href="{{ if eq .Site.Language.Lang "de" }}/blog/keycloak-active-directory/{{ else }}/en/blog/keycloak-active-directory/{{ end }}" class="service-link">
           <div class="service-icon-box">
             <img src="/images/keycloak-icon.svg" alt="Keycloak Active Directory Integration" width="40">
           </div>
