@@ -12,7 +12,8 @@ Germany
 **Represented by:**  
 David Picillo
 
-**Contact:** Email: david@picillo.de
+**Contact:**  
+Email: david\@picillo.de
 
 **VAT ID:** DE457195499
 
@@ -47,7 +48,7 @@ The data controller within the meaning of the General Data Protection Regulation
 David Picillo  
 Dellmannsweg 53A  
 45277 Essen  
-Email: david@picillo.de
+Email: david\@picillo.de
 
 ### 2. General Information on Data Processing
 

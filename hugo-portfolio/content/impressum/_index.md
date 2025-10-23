@@ -11,7 +11,8 @@ Deutschland
 **Vertreten durch:**  
 David Picillo
 
-**Kontakt:** E-Mail: david@picillo.de
+**Kontakt:**  
+E-Mail: david\@picillo.de
 
 **Umsatzsteuer-ID:** DE457195499
 
@@ -46,7 +47,7 @@ Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:
 David Picillo  
 Dellmannsweg 53A  
 45277 Essen  
-E-Mail: david@picillo.de
+E-Mail: david\@picillo.de
 
 ### 2. Allgemeines zur Datenverarbeitung
 
