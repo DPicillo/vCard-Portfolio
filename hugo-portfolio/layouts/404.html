@@ -1,0 +1,203 @@
+{{ define "main" }}
+<article class="about active" data-page="error">
+  
+  <a href="{{ if eq .Site.Language.Lang "de" }}/{{ else }}/en/{{ end }}" class="back-button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512">
+      <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/>
+    </svg>
+    {{ if eq .Site.Language.Lang "de" }}
+      Zurück zur Startseite
+    {{ else }}
+      Back to Home
+    {{ end }}
+  </a>
+
+  <div class="error-container">
+    <h1 class="error-code">404</h1>
+    
+    <h2 class="error-title">
+      {{ if eq .Site.Language.Lang "de" }}
+        Seite nicht gefunden
+      {{ else }}
+        Page Not Found
+      {{ end }}
+    </h2>
+    
+    <p class="error-description">
+      {{ if eq .Site.Language.Lang "de" }}
+        Die angeforderte Seite konnte leider nicht gefunden werden. Möglicherweise wurde sie verschoben, umbenannt oder existiert nicht mehr.
+      {{ else }}
+        The requested page could not be found. It may have been moved, renamed, or no longer exists.
+      {{ end }}
+    </p>
+
+    <div class="error-suggestions">
+      <h3 class="suggestions-title">
+        {{ if eq .Site.Language.Lang "de" }}
+          Was können Sie tun?
+        {{ else }}
+          What can you do?
+        {{ end }}
+      </h3>
+      <ul class="suggestions-list">
+        <li>
+          {{ if eq .Site.Language.Lang "de" }}
+            Überprüfen Sie die URL auf Tippfehler
+          {{ else }}
+            Check the URL for typos
+          {{ end }}
+        </li>
+        <li>
+          {{ if eq .Site.Language.Lang "de" }}
+            Kehren Sie zur <a href="/" style="color: var(--orange-yellow-crayola);">Startseite</a> zurück
+          {{ else }}
+            Return to the <a href="/en/" style="color: var(--orange-yellow-crayola);">homepage</a>
+          {{ end }}
+        </li>
+        <li>
+          {{ if eq .Site.Language.Lang "de" }}
+            Besuchen Sie meinen <a href="/blog/" style="color: var(--orange-yellow-crayola);">technischen Blog</a>
+          {{ else }}
+            Visit my <a href="/en/blog/" style="color: var(--orange-yellow-crayola);">technical blog</a>
+          {{ end }}
+        </li>
+        <li>
+          {{ if eq .Site.Language.Lang "de" }}
+            Kontaktieren Sie mich unter <a href="mailto:david@picillo.de" style="color: var(--orange-yellow-crayola);">david@picillo.de</a>
+          {{ else }}
+            Contact me at <a href="mailto:david@picillo.de" style="color: var(--orange-yellow-crayola);">david@picillo.de</a>
+          {{ end }}
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</article>
+
+<style>
+  /* 404-specific styles */
+  .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--orange-yellow-crayola);
+    text-decoration: none;
+    margin-bottom: 20px;
+    font-weight: var(--fw-500);
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    background: rgba(249, 115, 22, 0.05);
+  }
+  
+  .back-button:hover {
+    transform: translateX(-2px);
+    background: rgba(249, 115, 22, 0.1);
+    border-color: var(--orange-yellow-crayola);
+  }
+  
+  .back-button svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+  }
+  
+  .back-button:hover svg {
+    transform: translateX(-2px);
+  }
+  
+  .error-container {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .error-code {
+    font-size: 8rem;
+    font-weight: 700;
+    color: var(--orange-yellow-crayola);
+    margin: 0;
+    line-height: 1;
+    text-shadow: 0 4px 8px rgba(249, 115, 22, 0.3);
+  }
+  
+  .error-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--white-2);
+    margin: 20px 0 15px 0;
+    line-height: 1.2;
+  }
+  
+  .error-description {
+    color: var(--light-gray);
+    font-size: var(--fs-4);
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+  
+  .error-suggestions {
+    background: var(--border-gradient-onyx);
+    border-radius: 16px;
+    padding: 24px;
+    margin: 30px 0;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .error-suggestions::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    background: var(--bg-gradient-jet);
+    border-radius: inherit;
+    z-index: -1;
+  }
+  
+  .suggestions-title {
+    color: var(--white-2);
+    font-size: var(--fs-3);
+    font-weight: var(--fw-500);
+    margin-bottom: 15px;
+  }
+  
+  .suggestions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .suggestions-list li {
+    color: var(--light-gray);
+    margin-bottom: 8px;
+    padding-left: 20px;
+    position: relative;
+    text-align: left;
+  }
+  
+  .suggestions-list li::before {
+    content: "•";
+    color: var(--orange-yellow-crayola);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+  }
+  
+  @media (max-width: 580px) {
+    .error-code {
+      font-size: 6rem;
+    }
+    
+    .error-title {
+      font-size: 1.5rem;
+    }
+    
+    .error-container {
+      padding: 40px 15px;
+    }
+  }
+</style>
+{{ end }}

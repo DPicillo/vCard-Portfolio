@@ -1,0 +1,129 @@
+{{ define "main" }}
+<article class="blog" data-page="blog">
+  <header>
+    <h2 class="h2 article-title">
+      {{ if eq .Site.Language.Lang "de" }}
+        Technischer Blog
+      {{ else }}
+        Technical Blog
+      {{ end }}
+    </h2>
+  </header>
+
+  <section class="service blog">
+    <h3 class="h3 service-title">
+      {{ if eq .Site.Language.Lang "de" }}
+        Meine technischen Beiträge
+      {{ else }}
+        My Technical Contributions
+      {{ end }}
+    </h3>
+
+    <ul class="service-list">
+      <li class="service-item">
+        <a href="/blog/keycloak-active-directory/" class="service-link">
+          <div class="service-icon-box">
+            <img src="/images/keycloak-icon.svg" alt="Keycloak Active Directory Integration" width="40">
+          </div>
+
+          <div class="service-content-box">
+            <h4 class="h4 service-item-title">
+              {{ if eq .Site.Language.Lang "de" }}
+                Keycloak & Active Directory Integration
+              {{ else }}
+                Keycloak & Active Directory Integration
+              {{ end }}
+            </h4>
+
+            <p class="service-item-text">
+              {{ if eq .Site.Language.Lang "de" }}
+                Umfassender Leitfaden zur Integration von Keycloak mit Active Directory über LDAP User Federation für Single Sign-On und Identity Management.
+              {{ else }}
+                Comprehensive guide to integrating Keycloak with Active Directory using LDAP User Federation for Single Sign-On and Identity Management.
+              {{ end }}
+            </p>
+          </div>
+        </a>
+      </li>
+
+      <li class="service-item">
+        <a href="#" class="service-link" onclick="return false;" style="opacity: 0.5; cursor: not-allowed;">
+          <div class="service-icon-box">
+            <img src="/images/icon-app.svg" alt="Coming Soon" width="40">
+          </div>
+
+          <div class="service-content-box">
+            <h4 class="h4 service-item-title">
+              {{ if eq .Site.Language.Lang "de" }}
+                Kubernetes Networking Deep Dive
+              {{ else }}
+                Kubernetes Networking Deep Dive
+              {{ end }}
+            </h4>
+
+            <p class="service-item-text">
+              {{ if eq .Site.Language.Lang "de" }}
+                Detaillierte Analyse von Kubernetes-Netzwerkkonzepten, Service Mesh und CNI-Plugins. (In Vorbereitung)
+              {{ else }}
+                Detailed analysis of Kubernetes networking concepts, Service Mesh, and CNI plugins. (Coming Soon)
+              {{ end }}
+            </p>
+          </div>
+        </a>
+      </li>
+
+      <li class="service-item">
+        <a href="#" class="service-link" onclick="return false;" style="opacity: 0.5; cursor: not-allowed;">
+          <div class="service-icon-box">
+            <img src="/images/icon-design.svg" alt="Coming Soon" width="40">
+          </div>
+
+          <div class="service-content-box">
+            <h4 class="h4 service-item-title">
+              {{ if eq .Site.Language.Lang "de" }}
+                Terraform Best Practices für AWS
+              {{ else }}
+                Terraform Best Practices for AWS
+              {{ end }}
+            </h4>
+
+            <p class="service-item-text">
+              {{ if eq .Site.Language.Lang "de" }}
+                Bewährte Praktiken für Infrastructure as Code mit Terraform auf AWS, einschließlich Modulstruktur und State Management. (In Vorbereitung)
+              {{ else }}
+                Best practices for Infrastructure as Code with Terraform on AWS, including module structure and state management. (Coming Soon)
+              {{ end }}
+            </p>
+          </div>
+        </a>
+      </li>
+
+      <li class="service-item">
+        <a href="#" class="service-link" onclick="return false;" style="opacity: 0.5; cursor: not-allowed;">
+          <div class="service-icon-box">
+            <img src="/images/icon-photo.svg" alt="Coming Soon" width="40">
+          </div>
+
+          <div class="service-content-box">
+            <h4 class="h4 service-item-title">
+              {{ if eq .Site.Language.Lang "de" }}
+                Observability mit Grafana
+              {{ else }}
+                Observability with Grafana
+              {{ end }}
+            </h4>
+
+            <p class="service-item-text">
+              {{ if eq .Site.Language.Lang "de" }}
+                Aufbau einer modernen Observability-Plattform für cloud-native Anwendungen mit Grafana, Loki und Mimir. (In Vorbereitung)
+              {{ else }}
+                Building a modern observability platform for cloud-native applications with Grafana, Loki, and Mimir. (Coming Soon)
+              {{ end }}
+            </p>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </section>
+</article>
+{{ end }}

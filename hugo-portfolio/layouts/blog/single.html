@@ -1,0 +1,59 @@
+{{ define "main" }}
+<article class="blog-post" data-page="blog-post">
+  <!-- Back to Blog Navigation -->
+  <nav class="blog-nav">
+    <a href="{{ if eq .Site.Language.Lang "de" }}/blog/{{ else }}/en/blog/{{ end }}" class="back-to-blog">
+      <svg class="back-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/>
+      </svg>
+      {{ if eq .Site.Language.Lang "de" }}
+        Zurück zum Blog
+      {{ else }}
+        Back to Blog
+      {{ end }}
+    </a>
+  </nav>
+
+  <header class="blog-post-header">
+    <h1 class="h1 blog-post-title">{{ .Title }}</h1>
+    
+    {{ if .Date }}
+    <div class="blog-post-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ if eq .Site.Language.Lang "de" }}
+          {{ .Date.Format "2. January 2006" }}
+        {{ else }}
+          {{ .Date.Format "January 2, 2006" }}
+        {{ end }}
+      </time>
+      
+      {{ if .Params.tags }}
+      <div class="blog-post-tags">
+        {{ range .Params.tags }}
+        <span class="tag">{{ . }}</span>
+        {{ end }}
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </header>
+
+  <div class="blog-post-content">
+    {{ .Content }}
+  </div>
+
+  <!-- Back to Blog Footer -->
+  <footer class="blog-post-footer">
+    <a href="{{ if eq .Site.Language.Lang "de" }}/blog/{{ else }}/en/blog/{{ end }}" class="back-to-blog-footer">
+      <svg class="back-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/>
+      </svg>
+      {{ if eq .Site.Language.Lang "de" }}
+        Zurück zum Blog
+      {{ else }}
+        Back to Blog
+      {{ end }}
+    </a>
+  </footer>
+</article>
+{{ end }}

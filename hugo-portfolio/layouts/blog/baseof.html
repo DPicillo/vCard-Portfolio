@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+  <meta name="title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+  <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta name="keywords" content="{{ delimit .Site.Params.keywords ", " }}">
+  <meta name="author" content="{{ .Site.Params.author }}">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="{{ .Site.Language.Lang }}">
+  <meta name="revisit-after" content="7 days">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ .Permalink }}">
+  
+  <!-- Hreflang for multilingual content -->
+  {{ range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+  {{ end }}
+  <link rel="alternate" hreflang="x-default" href="{{ .Site.BaseURL }}">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+  <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="og:image" content="{{ .Site.BaseURL }}images/DPicillo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="David Picillo - Cloud DevOps Engineer">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  <meta property="og:locale" content="{{ if eq .Site.Language.Lang "de" }}de_DE{{ else }}en_US{{ end }}">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ .Permalink }}">
+  <meta property="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+  <meta property="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="twitter:image" content="{{ .Site.BaseURL }}images/DPicillo.png">
+  <meta property="twitter:image:alt" content="David Picillo - Cloud DevOps Engineer">
+  
+  <!-- LinkedIn -->
+  <meta property="article:author" content="{{ .Site.Params.linkedin }}">
+  
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "{{ .Title }}",
+    "description": "{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ .Site.Params.author }}",
+      "jobTitle": "Cloud DevOps Engineer",
+      "url": "{{ .Site.BaseURL }}",
+      "image": "{{ .Site.BaseURL }}images/DPicillo.png"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "{{ .Site.Params.author }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ .Site.BaseURL }}images/DPicillo.png"
+      }
+    },
+    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ .Permalink }}"
+    },
+    "image": "{{ .Site.BaseURL }}images/DPicillo.png",
+    "url": "{{ .Permalink }}"
+  }
+  </script>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/DPicillo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/DPicillo.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="{{ .Site.Params.primaryColor }}">
+  <meta name="msapplication-TileColor" content="{{ .Site.Params.primaryColor }}">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="{{ .Site.Title }}">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/fonts.css">
+  
+  <!-- Language Toggle Styles -->
+  <style>
+    .language-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 4px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+    
+    .language-toggle:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    
+    .lang-btn {
+      width: 28px;
+      height: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-size: cover;
+      background-position: center;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .lang-btn.active {
+      border-color: {{ .Site.Params.primaryColor }};
+      box-shadow: 0 1px 4px rgba(249, 115, 22, 0.3);
+    }
+    
+    .lang-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .lang-de {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjMDAwMDAwIi8+CjxyZWN0IHk9IjEwIiB3aWR0aD0iNDAiIGhlaWdodD0iMTAiIGZpbGw9IiNERDAwMDAiLz4KPHJlY3QgeT0iMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIxMCIgZmlsbD0iI0ZGQ0UwMCIvPgo8L3N2Zz4K');
+    }
+    
+    .lang-en {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjQjIyMjM0Ii8+CjxyZWN0IHk9IjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSI2IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMTAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIxNCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHk9IjE4IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIyNiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHdpZHRoPSIxNiIgaGVpZ2h0PSIxNCIgZmlsbD0iIzNCNEE5QSIvPgo8L3N2Zz4K');
+    }
+    
+    /* Blog Navigation Styles */
+    .blog-nav {
+      margin-bottom: 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--jet);
+    }
+    
+    .back-to-blog, .back-to-blog-footer {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--orange-yellow-crayola);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background: rgba(249, 115, 22, 0.1);
+    }
+    
+    .back-to-blog:hover, .back-to-blog-footer:hover {
+      background: rgba(249, 115, 22, 0.2);
+      transform: translateX(-4px);
+    }
+    
+    .back-arrow {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.25rem;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    
+    .back-to-blog:hover .back-arrow,
+    .back-to-blog-footer:hover .back-arrow {
+      transform: translateX(-2px);
+    }
+    
+    .blog-post-header {
+      margin-bottom: 2rem;
+    }
+    
+    .blog-post-title {
+      color: var(--white-2);
+      margin-bottom: 1rem;
+    }
+    
+    .blog-post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      color: var(--light-gray-70);
+      font-size: var(--fs-6);
+    }
+    
+    .blog-post-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .tag {
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--orange-yellow-crayola);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: var(--fs-7);
+      font-weight: 500;
+    }
+    
+    .blog-post-content {
+      color: var(--light-gray);
+      line-height: 1.8;
+    }
+    
+    .blog-post-content h2 {
+      color: var(--white-2);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .blog-post-content h3 {
+      color: var(--white-2);
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .blog-post-content h4 {
+      color: var(--orange-yellow-crayola);
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .blog-post-content p {
+      margin-bottom: 1rem;
+    }
+    
+    .blog-post-content ul, .blog-post-content ol {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    
+    .blog-post-content li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .blog-post-content blockquote {
+      border-left: 4px solid var(--orange-yellow-crayola);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      background: rgba(249, 115, 22, 0.05);
+      padding: 1rem;
+      border-radius: 4px;
+    }
+    
+    .blog-post-content code {
+      background: var(--eerie-black-2);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      color: var(--orange-yellow-crayola);
+    }
+    
+    .blog-post-content pre {
+      background: var(--eerie-black-2);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    
+    .blog-post-content pre code {
+      background: none;
+      padding: 0;
+      color: var(--light-gray);
+    }
+    
+    .blog-post-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    
+    .blog-post-footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--jet);
+      text-align: center;
+    }
+    
+    @media (max-width: 580px) {
+      .language-toggle {
+        opacity: 0.4;
+        transform: scale(0.8);
+        top: 5px;
+        right: 5px;
+      }
+      
+      .language-toggle:hover {
+        opacity: 1;
+        transform: scale(1);
+      }
+      
+      .lang-btn {
+        width: 24px;
+        height: 16px;
+      }
+      
+      .blog-post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+    
+    @media (min-width: 1250px) {
+      .language-toggle {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        opacity: 0.8;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Language Toggle -->
+  <div class="language-toggle">
+    {{ range .AllTranslations }}
+      <a href="{{ .RelPermalink }}" class="lang-btn lang-{{ .Language.Lang }}{{ if eq .Language.Lang $.Site.Language.Lang }} active{{ end }}" title="{{ .Language.LanguageName }}"></a>
+    {{ end }}
+  </div>
+
+  <!--
+    - #MAIN
+  -->
+  <main>
+    <!--
+      - #SIDEBAR
+    -->
+    {{ partial "sidebar.html" . }}
+
+    <!--
+      - #main-content
+    -->
+    <div class="main-content">
+      <!--
+        - #NAVBAR
+      -->
+      {{ partial "navbar.html" . }}
+
+      <!--
+        - #CONTENT
+      -->
+      {{ block "main" . }}{{ end }}
+    </div>
+  </main>
+
+  <!-- JavaScript -->
+  <script type="module" src="/js/ionicons.esm.js"></script>
+  <script nomodule src="/js/ionicons.js"></script>
+  
+  <!-- Sidebar Toggle Script -->
+  <script>
+    // Sidebar toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebar = document.querySelector('[data-sidebar]');
+      const sidebarBtn = document.querySelector('[data-sidebar-btn]');
+      
+      if (sidebar && sidebarBtn) {
+        sidebarBtn.addEventListener('click', function() {
+          sidebar.classList.toggle('active');
+        });
+      }
+    });
+  </script>
+  
+  <!-- Auto Language Detection -->
+  <script>
+    // Auto-detect browser language on first visit
+    document.addEventListener('DOMContentLoaded', function() {
+      // Check if user has already set a language preference
+      const savedLang = localStorage.getItem('preferred-language');
+      
+      if (!savedLang) {
+        // Detect browser language
+        const browserLang = navigator.language || navigator.userLanguage;
+        const detectedLang = browserLang.startsWith('de') ? 'de' : 'en';
+        
+        // Get current page language
+        const currentLang = '{{ .Site.Language.Lang }}';
+        
+        // If detected language differs from current, redirect
+        if (detectedLang !== currentLang) {
+          const currentPath = window.location.pathname;
+          let newPath;
+          
+          if (detectedLang === 'de') {
+            // Switch to German
+            newPath = currentPath.replace(/^\/en\//, '/').replace(/^\/en$/, '/');
+          } else {
+            // Switch to English
+            if (currentPath === '/' || currentPath === '') {
+              newPath = '/en/';
+            } else {
+              newPath = '/en' + currentPath;
+            }
+          }
+          
+          // Only redirect if the path actually changed
+          if (newPath !== currentPath) {
+            window.location.href = newPath;
+          }
+        }
+        
+        // Save the detected language
+        localStorage.setItem('preferred-language', detectedLang);
+      }
+    });
+  </script>
+</body>
+</html>

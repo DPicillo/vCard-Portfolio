@@ -1,0 +1,121 @@
+<aside class="sidebar" data-sidebar>
+  <div class="sidebar-info">
+    <figure class="avatar-box">
+      <img src="/images/DPicillo.png" alt="David Picillo - Cloud DevOps Engineer Profile Picture" width="80" height="80" loading="eager" fetchpriority="high">
+    </figure>
+
+    <div class="info-content">
+      <h1 class="name" title="{{ .Site.Params.author }}">{{ .Site.Params.author }}</h1>
+
+      <p class="title">
+        {{ if eq .Site.Language.Lang "de" }}
+          Cloud DevOps Engineer
+        {{ else }}
+          Cloud DevOps Engineer
+        {{ end }}
+      </p>
+      
+      <div class="contact-header" data-sidebar-btn>
+        {{ if eq .Site.Language.Lang "de" }}
+          Kontakt anzeigen
+        {{ else }}
+          Show Contact
+        {{ end }}
+        <ion-icon name="chevron-down"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-info_more">
+    <div class="separator"></div>
+
+    <ul class="contacts-list">
+      <li class="contact-item">
+        <a href="mailto:{{ .Site.Params.email }}" class="icon-box">
+          <ion-icon name="mail-outline"></ion-icon>
+        </a>
+
+        <div class="contact-info">
+          <p class="contact-title">
+            {{ if eq .Site.Language.Lang "de" }}
+              E-Mail
+            {{ else }}
+              Email
+            {{ end }}
+          </p>
+          <a href="mailto:{{ .Site.Params.email }}" class="contact-link">{{ .Site.Params.email }}</a>
+        </div>
+      </li>
+
+      <li class="contact-item">
+        <div class="icon-box">
+          <ion-icon name="calendar-outline"></ion-icon>
+        </div>
+
+        <div class="contact-info">
+          <p class="contact-title">
+            {{ if eq .Site.Language.Lang "de" }}
+              Geburtstag
+            {{ else }}
+              Birthday
+            {{ end }}
+          </p>
+
+          <time datetime="{{ .Site.Params.birthday }}">
+            {{ if eq .Site.Language.Lang "de" }}
+              November 2002
+            {{ else }}
+              November 2002
+            {{ end }}
+          </time>
+        </div>
+      </li>
+
+      <li class="contact-item">
+        <a href="https://www.google.com/maps/search/45277+Essen,+Deutschland" target="_blank" rel="noopener" class="icon-box">
+          <ion-icon name="location-outline"></ion-icon>
+        </a>
+
+        <div class="contact-info">
+          <p class="contact-title">
+            {{ if eq .Site.Language.Lang "de" }}
+              Standort
+            {{ else }}
+              Location
+            {{ end }}
+          </p>
+
+          <address>
+            {{ if eq .Site.Language.Lang "de" }}
+              45277 Essen, Deutschland
+            {{ else }}
+              45277 Essen, Germany
+            {{ end }}
+          </address>
+        </div>
+      </li>
+    </ul>
+
+    <div class="separator"></div>
+
+    <ul class="social-list">
+      <li class="social-item">
+        <a href="{{ .Site.Params.linkedin }}" class="social-link" target="_blank" rel="noopener">
+          <ion-icon name="logo-linkedin"></ion-icon>
+        </a>
+      </li>
+
+      <li class="social-item">
+        <a href="{{ .Site.Params.github }}" class="social-link" target="_blank" rel="noopener">
+          <ion-icon name="logo-github"></ion-icon>
+        </a>
+      </li>
+
+      <li class="social-item">
+        <a href="{{ .Site.Params.xing }}" class="social-link" target="_blank" rel="noopener">
+          <ion-icon name="briefcase-outline"></ion-icon>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>

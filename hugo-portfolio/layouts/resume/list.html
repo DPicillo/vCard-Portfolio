@@ -1,0 +1,395 @@
+{{ define "main" }}
+<article class="resume" data-page="resume">
+  <header>
+    <h2 class="h2 article-title">
+      {{ if eq .Site.Language.Lang "de" }}
+        Lebenslauf
+      {{ else }}
+        Resume
+      {{ end }}
+    </h2>
+  </header>
+
+  <section class="timeline">
+    <div class="title-wrapper">
+      <div class="icon-box">
+        <ion-icon name="book-outline"></ion-icon>
+      </div>
+
+      <h3 class="h3">
+        {{ if eq .Site.Language.Lang "de" }}
+          Berufserfahrung
+        {{ else }}
+          Experience
+        {{ end }}
+      </h3>
+    </div>
+
+    <ol class="timeline-list">
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">DevOps Engineer</h4>
+
+        <span>
+          {{ if eq .Site.Language.Lang "de" }}
+            Februar 2024 — Heute
+          {{ else }}
+            February 2024 — Present
+          {{ end }}
+        </span>
+
+        <p class="timeline-text">
+          {{ if eq .Site.Language.Lang "de" }}
+            OBI Smart Technologies GmbH, Köln (Hybrid).<br>
+            • Architektur und Verwaltung Cloud Plattformen<br>
+            • Architektur und Verwaltung Kubernetes Clustern<br>
+            • Enablement & Empowerment der Teams<br>
+            <strong>Kenntnisse:</strong> IAM, SAML 2.0, Amazon EKS, CloudFront, Keycloak, AWS, OpenID Connect (OIDC), Google Cloud Platform (GCP)
+          {{ else }}
+            OBI Smart Technologies GmbH, Cologne (Hybrid).<br>
+            • Architecture and management of cloud platforms<br>
+            • Architecture and management of Kubernetes clusters<br>
+            • Team enablement & empowerment<br>
+            <strong>Skills:</strong> IAM, SAML 2.0, Amazon EKS, CloudFront, Keycloak, AWS, OpenID Connect (OIDC), Google Cloud Platform (GCP)
+          {{ end }}
+        </p>
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">Junior DevOps Engineer</h4>
+
+        <span>
+          {{ if eq .Site.Language.Lang "de" }}
+            Juli 2023 — Februar 2024
+          {{ else }}
+            July 2023 — February 2024
+          {{ end }}
+        </span>
+
+        <p class="timeline-text">
+          {{ if eq .Site.Language.Lang "de" }}
+            OBI Smart Technologies GmbH, Köln (Hybrid).<br>
+            Cloud and DevOps Engineering<br>
+            • Kubernetes Cluster Administration (Cloud - EKS)<br>
+            • Logging, Tracing und Monitoring<br>
+            • Cloud Platform and DevOps Engineering<br>
+            <strong>Kenntnisse:</strong> Amazon EKS, DevOps, Terraform, GitLab, Linux, CloudFront, Python, Keycloak, Docker, AWS, Kubernetes
+          {{ else }}
+            OBI Smart Technologies GmbH, Cologne (Hybrid).<br>
+            Cloud and DevOps Engineering<br>
+            • Kubernetes Cluster Administration (Cloud - EKS)<br>
+            • Logging, tracing and monitoring<br>
+            • Cloud Platform and DevOps Engineering<br>
+            <strong>Skills:</strong> Amazon EKS, DevOps, Terraform, GitLab, Linux, CloudFront, Python, Keycloak, Docker, AWS, Kubernetes
+          {{ end }}
+        </p>
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">Junior System Engineer</h4>
+
+        <span>
+          {{ if eq .Site.Language.Lang "de" }}
+            Juni 2022 — August 2023
+          {{ else }}
+            June 2022 — August 2023
+          {{ end }}
+        </span>
+
+        <p class="timeline-text">
+          {{ if eq .Site.Language.Lang "de" }}
+            OBI Smart Technologies GmbH, Wermelskirchen.<br>
+            Infrastructure Services<br>
+            • Linux Serveradministration, Konzeptionierung und Lifecycle Management<br>
+            • 3rd-Level-Support<br>
+            • Kubernetes Cluster Administration (On-Premise)<br>
+            <strong>Kenntnisse:</strong> Linux, Python, Docker, Kubernetes
+          {{ else }}
+            OBI Smart Technologies GmbH, Wermelskirchen.<br>
+            Infrastructure Services<br>
+            • Linux server administration, conceptualization and lifecycle management<br>
+            • 3rd-level support<br>
+            • Kubernetes Cluster Administration (On-Premise)<br>
+            <strong>Skills:</strong> Linux, Python, Docker, Kubernetes
+          {{ end }}
+        </p>
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">
+          {{ if eq .Site.Language.Lang "de" }}
+            Fachinformatiker Systemintegration
+          {{ else }}
+            IT Systems Integration Specialist
+          {{ end }}
+        </h4>
+
+        <span>
+          {{ if eq .Site.Language.Lang "de" }}
+            2019 — Juni 2022
+          {{ else }}
+            2019 — June 2022
+          {{ end }}
+        </span>
+
+        <p class="timeline-text">
+          {{ if eq .Site.Language.Lang "de" }}
+            Ausbildung bei OBI Services mit Abschluss bei der IHK Köln. Schwerpunkt auf Systemintegration und IT-Infrastruktur.
+          {{ else }}
+            Training at OBI Services with graduation from IHK Cologne. Focus on system integration and IT infrastructure.
+          {{ end }}
+        </p>
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">
+          {{ if eq .Site.Language.Lang "de" }}
+            Praktikum - Fachinformatiker
+          {{ else }}
+            Internship - IT Specialist
+          {{ end }}
+        </h4>
+
+        <span>
+          {{ if eq .Site.Language.Lang "de" }}
+            September 2017
+          {{ else }}
+            September 2017
+          {{ end }}
+        </span>
+
+        <p class="timeline-text">
+          {{ if eq .Site.Language.Lang "de" }}
+            Barmenia Versicherungen, Wuppertal. Einmonatiges Praktikum im Rahmen der Ausbildungsvorbereitung.
+          {{ else }}
+            Barmenia Insurance, Wuppertal. One-month internship as part of training preparation.
+          {{ end }}
+        </p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="timeline">
+    <div class="title-wrapper">
+      <div class="icon-box">
+        <ion-icon name="book-outline"></ion-icon>
+      </div>
+
+      <h3 class="h3">
+        {{ if eq .Site.Language.Lang "de" }}
+          Bildung
+        {{ else }}
+          Education
+        {{ end }}
+      </h3>
+    </div>
+
+    <ol class="timeline-list">
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">AWS Certified Solutions Architect - Professional (SAP-02)</h4>
+
+        <span>
+          {{ if eq .Site.Language.Lang "de" }}
+            Ausgestellt: August 2024
+          {{ else }}
+            Issued: August 2024
+          {{ end }}
+        </span>
+
+        <p class="timeline-text">
+          {{ if eq .Site.Language.Lang "de" }}
+            Amazon Web Services (AWS)<br>
+            Zertifizierung für fortgeschrittene AWS-Architektur und Cloud-Lösungsdesign.<br>
+            <strong>Zertifikats-ID:</strong> 1cef1aad1aac476f8b74fe71a661b65b<br>
+            <strong>Kenntnisse:</strong> Amazon Web Services (AWS)
+          {{ else }}
+            Amazon Web Services (AWS)<br>
+            Advanced AWS architecture and cloud solution design certification.<br>
+            <strong>Certificate ID:</strong> 1cef1aad1aac476f8b74fe71a661b65b<br>
+            <strong>Skills:</strong> Amazon Web Services (AWS)
+          {{ end }}
+        </p>
+        
+        <a href="https://www.credly.com/badges/23a961ad-4b22-49b6-b656-bd72fd6f9af1/public_url" target="_blank" rel="noopener" class="cert-button">
+          {{ if eq .Site.Language.Lang "de" }}
+            Zertifikat anzeigen
+          {{ else }}
+            View Certificate
+          {{ end }}
+        </a>
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">Certified Kubernetes Administrator (CKA)</h4>
+
+        <span>
+          {{ if eq .Site.Language.Lang "de" }}
+            Ausgestellt: November 2023
+          {{ else }}
+            Issued: November 2023
+          {{ end }}
+        </span>
+
+        <p class="timeline-text">
+          {{ if eq .Site.Language.Lang "de" }}
+            The Linux Foundation<br>
+            Linux Foundation-Zertifizierung für Kubernetes-Cluster-Administration.<br>
+            <strong>Zertifikats-ID:</strong> LF-9fr7eqizs9<br>
+            <strong>Kenntnisse:</strong> Kubernetes
+          {{ else }}
+            The Linux Foundation<br>
+            Linux Foundation certification for Kubernetes Cluster Administration.<br>
+            <strong>Certificate ID:</strong> LF-9fr7eqizs9<br>
+            <strong>Skills:</strong> Kubernetes
+          {{ end }}
+        </p>
+        
+        <a href="https://www.credly.com/badges/a4fecc29-0743-48fd-8c36-08c87db1530f/public_url" target="_blank" rel="noopener" class="cert-button">
+          {{ if eq .Site.Language.Lang "de" }}
+            Zertifikat anzeigen
+          {{ else }}
+            View Certificate
+          {{ end }}
+        </a>
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">ITIL® Foundation Certificate in IT Service Management</h4>
+
+        <span>
+          {{ if eq .Site.Language.Lang "de" }}
+            Ausgestellt: Mai 2023 · Gültig bis: Mai 2026
+          {{ else }}
+            Issued: May 2023 · Valid until: May 2026
+          {{ end }}
+        </span>
+
+        <p class="timeline-text">
+          {{ if eq .Site.Language.Lang "de" }}
+            PeopleCert<br>
+            IT Service Management Foundation-Zertifizierung.<br>
+            <strong>Zertifikats-ID:</strong> GR671521351DP
+          {{ else }}
+            PeopleCert<br>
+            IT Service Management Foundation certification.<br>
+            <strong>Certificate ID:</strong> GR671521351DP
+          {{ end }}
+        </p>
+        
+        <a href="https://www.peoplecert.org/for-corporations/certificate-verification-service" target="_blank" rel="noopener" class="cert-button">
+          {{ if eq .Site.Language.Lang "de" }}
+            Zertifikat anzeigen
+          {{ else }}
+            View Certificate
+          {{ end }}
+        </a>
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">LPIC-1</h4>
+
+        <span>
+          {{ if eq .Site.Language.Lang "de" }}
+            Ausgestellt: März 2023 · Gültig bis: März 2028
+          {{ else }}
+            Issued: March 2023 · Valid until: March 2028
+          {{ end }}
+        </span>
+
+        <p class="timeline-text">
+          {{ if eq .Site.Language.Lang "de" }}
+            Linux Professional Institute (LPI)<br>
+            Linux Professional Institute-Zertifizierung Level 1.
+          {{ else }}
+            Linux Professional Institute (LPI)<br>
+            Linux Professional Institute certification Level 1.
+          {{ end }}
+        </p>
+        
+        <a href="https://cs.lpi.org/caf/Xamman/certification/verify/LPI000535267/klrcufvyuk" target="_blank" rel="noopener" class="cert-button">
+          {{ if eq .Site.Language.Lang "de" }}
+            Zertifikat anzeigen
+          {{ else }}
+            View Certificate
+          {{ end }}
+        </a>
+      </li>
+
+      <li class="timeline-item">
+        <h4 class="h4 timeline-item-title">
+          {{ if eq .Site.Language.Lang "de" }}
+            Fachinformatiker für Systemintegration
+          {{ else }}
+            IT Systems Integration Specialist
+          {{ end }}
+        </h4>
+
+        <span>
+          {{ if eq .Site.Language.Lang "de" }}
+            2019 — Juni 2022
+          {{ else }}
+            2019 — June 2022
+          {{ end }}
+        </span>
+
+        <p class="timeline-text">
+          {{ if eq .Site.Language.Lang "de" }}
+            Ausbildung bei OBI Services mit Abschluss bei der IHK Köln. Schwerpunkt auf Systemintegration und IT-Infrastruktur.
+          {{ else }}
+            Training at OBI Services with graduation from IHK Cologne. Focus on system integration and IT infrastructure.
+          {{ end }}
+        </p>
+      </li>
+    </ol>
+  </section>
+
+  <section class="skill">
+    <h3 class="h3 skills-title">
+      {{ if eq .Site.Language.Lang "de" }}
+        Meine Kenntnisse
+      {{ else }}
+        My Skills
+      {{ end }}
+    </h3>
+
+    <div class="skills-grid content-card">
+      <div class="skill-tag expert">Amazon Web Services (AWS)</div>
+      <div class="skill-tag intermediate">Google Cloud Platform (GCP)</div>
+      <div class="skill-tag expert">Kubernetes</div>
+      <div class="skill-tag advanced">Docker</div>
+      <div class="skill-tag advanced">Identity and Access Management</div>
+      <div class="skill-tag advanced">Terraform</div>
+      <div class="skill-tag advanced">GitLab CI/CD</div>
+      <div class="skill-tag intermediate">Python</div>
+      <div class="skill-tag intermediate">Ansible</div>
+    </div>
+  </section>
+</article>
+
+<style>
+.cert-button {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 4px 8px;
+  background: rgba(249, 115, 22, 0.1);
+  color: #F97316;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  transition: all 0.2s ease;
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  cursor: pointer;
+}
+
+.cert-button:hover {
+  background: rgba(249, 115, 22, 0.15);
+  color: #EA580C;
+  text-decoration: none;
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+.cert-button:active {
+  background: rgba(249, 115, 22, 0.2);
+}
+</style>
+{{ end }}

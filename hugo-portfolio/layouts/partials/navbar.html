@@ -1,0 +1,35 @@
+<nav class="navbar">
+  <ul class="navbar-list">
+    {{ $currentPage := .RelPermalink }}
+    
+    <li class="navbar-item">
+      <a class="navbar-link{{ if or (eq $currentPage "/") (eq $currentPage "/en/") }} active{{ end }}" href="{{ if eq .Site.Language.Lang "de" }}/{{ else }}/en/{{ end }}">
+        {{ if eq .Site.Language.Lang "de" }}
+          Über mich
+        {{ else }}
+          About
+        {{ end }}
+      </a>
+    </li>
+
+    <li class="navbar-item">
+      <a class="navbar-link{{ if hasPrefix $currentPage "/resume" }} active{{ end }}" href="{{ if eq .Site.Language.Lang "de" }}/resume/{{ else }}/en/resume/{{ end }}">
+        {{ if eq .Site.Language.Lang "de" }}
+          Lebenslauf
+        {{ else }}
+          Resume
+        {{ end }}
+      </a>
+    </li>
+
+    <li class="navbar-item">
+      <a class="navbar-link{{ if hasPrefix $currentPage "/blog" }} active{{ end }}" href="{{ if eq .Site.Language.Lang "de" }}/blog/{{ else }}/en/blog/{{ end }}">
+        {{ if eq .Site.Language.Lang "de" }}
+          Blog
+        {{ else }}
+          Blog
+        {{ end }}
+      </a>
+    </li>
+  </ul>
+</nav>

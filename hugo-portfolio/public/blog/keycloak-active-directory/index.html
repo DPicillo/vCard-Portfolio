@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <title>Keycloak User Federation mit Active Directory - David Picillo - Cloud DevOps Engineer</title>
+  <meta name="title" content="Keycloak User Federation mit Active Directory - David Picillo - Cloud DevOps Engineer">
+  <meta name="description" content="Umfassender Leitfaden zur Integration von Keycloak mit Active Directory über LDAP User Federation für Single Sign-On und Identity Management.">
+  <meta name="keywords" content="David Picillo, Cloud DevOps Engineer, AWS, Kubernetes, DevOps, Infrastructure as Code, Terraform, Docker, CI/CD">
+  <meta name="author" content="David Picillo">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="de">
+  <meta name="revisit-after" content="7 days">
+  
+  
+  <link rel="canonical" href="https://david.picillo.de/blog/keycloak-active-directory/">
+  
+  
+  
+  <link rel="alternate" hreflang="de" href="https://david.picillo.de/blog/keycloak-active-directory/">
+  
+  <link rel="alternate" hreflang="en" href="https://david.picillo.de/en/blog/keycloak-active-directory/">
+  
+  <link rel="alternate" hreflang="x-default" href="https://david.picillo.de/">
+  
+  
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://david.picillo.de/blog/keycloak-active-directory/">
+  <meta property="og:title" content="Keycloak User Federation mit Active Directory - David Picillo - Cloud DevOps Engineer">
+  <meta property="og:description" content="Umfassender Leitfaden zur Integration von Keycloak mit Active Directory über LDAP User Federation für Single Sign-On und Identity Management.">
+  <meta property="og:image" content="https://david.picillo.de/images/DPicillo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="David Picillo - Cloud DevOps Engineer">
+  <meta property="og:site_name" content="David Picillo - Cloud DevOps Engineer">
+  <meta property="og:locale" content="de_DE">
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://david.picillo.de/blog/keycloak-active-directory/">
+  <meta property="twitter:title" content="Keycloak User Federation mit Active Directory - David Picillo - Cloud DevOps Engineer">
+  <meta property="twitter:description" content="Umfassender Leitfaden zur Integration von Keycloak mit Active Directory über LDAP User Federation für Single Sign-On und Identity Management.">
+  <meta property="twitter:image" content="https://david.picillo.de/images/DPicillo.png">
+  <meta property="twitter:image:alt" content="David Picillo - Cloud DevOps Engineer">
+  
+  
+  <meta property="article:author" content="https://linkedin.com/in/david-picillo">
+  
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Keycloak User Federation mit Active Directory",
+    "description": "Umfassender Leitfaden zur Integration von Keycloak mit Active Directory über LDAP User Federation für Single Sign-On und Identity Management.",
+    "author": {
+      "@type": "Person",
+      "name": "David Picillo",
+      "jobTitle": "Cloud DevOps Engineer",
+      "url": "https:\/\/david.picillo.de\/",
+      "image": "https:\/\/david.picillo.de\/images/DPicillo.png"
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "David Picillo",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https:\/\/david.picillo.de\/images/DPicillo.png"
+      }
+    },
+    "datePublished": "2025-01-15T10:00:00Z",
+    "dateModified": "2025-01-15T10:00:00Z",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/david.picillo.de\/blog\/keycloak-active-directory\/"
+    },
+    "image": "https:\/\/david.picillo.de\/images/DPicillo.png",
+    "url": "https:\/\/david.picillo.de\/blog\/keycloak-active-directory\/"
+  }
+  </script>
+  
+  
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/DPicillo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/DPicillo.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  
+  <meta name="theme-color" content="#F97316">
+  <meta name="msapplication-TileColor" content="#F97316">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="David Picillo - Cloud DevOps Engineer">
+
+  
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/fonts.css">
+  
+  
+  <style>
+    .language-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 4px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+    
+    .language-toggle:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    
+    .lang-btn {
+      width: 28px;
+      height: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-size: cover;
+      background-position: center;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .lang-btn.active {
+      border-color: #F97316;
+      box-shadow: 0 1px 4px rgba(249, 115, 22, 0.3);
+    }
+    
+    .lang-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .lang-de {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjMDAwMDAwIi8+CjxyZWN0IHk9IjEwIiB3aWR0aD0iNDAiIGhlaWdodD0iMTAiIGZpbGw9IiNERDAwMDAiLz4KPHJlY3QgeT0iMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIxMCIgZmlsbD0iI0ZGQ0UwMCIvPgo8L3N2Zz4K');
+    }
+    
+    .lang-en {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjQjIyMjM0Ii8+CjxyZWN0IHk9IjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSI2IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMTAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIxNCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHk9IjE4IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIyNiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHdpZHRoPSIxNiIgaGVpZ2h0PSIxNCIgZmlsbD0iIzNCNEE5QSIvPgo8L3N2Zz4K');
+    }
+    
+     
+    .blog-nav {
+      margin-bottom: 2rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--jet);
+    }
+    
+    .back-to-blog, .back-to-blog-footer {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--orange-yellow-crayola);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background: rgba(249, 115, 22, 0.1);
+    }
+    
+    .back-to-blog:hover, .back-to-blog-footer:hover {
+      background: rgba(249, 115, 22, 0.2);
+      transform: translateX(-4px);
+    }
+    
+    .back-arrow {
+      width: 20px;
+      height: 20px;
+      margin-right: 0.25rem;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    
+    .back-to-blog:hover .back-arrow,
+    .back-to-blog-footer:hover .back-arrow {
+      transform: translateX(-2px);
+    }
+    
+    .blog-post-header {
+      margin-bottom: 2rem;
+    }
+    
+    .blog-post-title {
+      color: var(--white-2);
+      margin-bottom: 1rem;
+    }
+    
+    .blog-post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      color: var(--light-gray-70);
+      font-size: var(--fs-6);
+    }
+    
+    .blog-post-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .tag {
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--orange-yellow-crayola);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: var(--fs-7);
+      font-weight: 500;
+    }
+    
+    .blog-post-content {
+      color: var(--light-gray);
+      line-height: 1.8;
+    }
+    
+    .blog-post-content h2 {
+      color: var(--white-2);
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .blog-post-content h3 {
+      color: var(--white-2);
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .blog-post-content h4 {
+      color: var(--orange-yellow-crayola);
+      margin-top: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .blog-post-content p {
+      margin-bottom: 1rem;
+    }
+    
+    .blog-post-content ul, .blog-post-content ol {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    
+    .blog-post-content li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .blog-post-content blockquote {
+      border-left: 4px solid var(--orange-yellow-crayola);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      background: rgba(249, 115, 22, 0.05);
+      padding: 1rem;
+      border-radius: 4px;
+    }
+    
+    .blog-post-content code {
+      background: var(--eerie-black-2);
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      color: var(--orange-yellow-crayola);
+    }
+    
+    .blog-post-content pre {
+      background: var(--eerie-black-2);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+    
+    .blog-post-content pre code {
+      background: none;
+      padding: 0;
+      color: var(--light-gray);
+    }
+    
+    .blog-post-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+    
+    .blog-post-footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--jet);
+      text-align: center;
+    }
+    
+    @media (max-width: 580px) {
+      .language-toggle {
+        opacity: 0.4;
+        transform: scale(0.8);
+        top: 5px;
+        right: 5px;
+      }
+      
+      .language-toggle:hover {
+        opacity: 1;
+        transform: scale(1);
+      }
+      
+      .lang-btn {
+        width: 24px;
+        height: 16px;
+      }
+      
+      .blog-post-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+    }
+    
+    @media (min-width: 1250px) {
+      .language-toggle {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        opacity: 0.8;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+  <div class="language-toggle">
+    
+      <a href="/blog/keycloak-active-directory/" class="lang-btn lang-de active" title="Deutsch"></a>
+    
+      <a href="/en/blog/keycloak-active-directory/" class="lang-btn lang-en" title="English"></a>
+    
+  </div>
+
+  
+  <main>
+    
+    <aside class="sidebar" data-sidebar>
+  <div class="sidebar-info">
+    <figure class="avatar-box">
+      <img src="/images/DPicillo.png" alt="David Picillo - Cloud DevOps Engineer Profile Picture" width="80" height="80" loading="eager" fetchpriority="high">
+    </figure>
+
+    <div class="info-content">
+      <h1 class="name" title="David Picillo">David Picillo</h1>
+
+      <p class="title">
+        
+          Cloud DevOps Engineer
+        
+      </p>
+      
+      <div class="contact-header" data-sidebar-btn>
+        
+          Kontakt anzeigen
+        
+        <ion-icon name="chevron-down"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-info_more">
+    <div class="separator"></div>
+
+    <ul class="contacts-list">
+      <li class="contact-item">
+        <a href="mailto:david@picillo.de" class="icon-box">
+          <ion-icon name="mail-outline"></ion-icon>
+        </a>
+
+        <div class="contact-info">
+          <p class="contact-title">
+            
+              E-Mail
+            
+          </p>
+          <a href="mailto:david@picillo.de" class="contact-link">david@picillo.de</a>
+        </div>
+      </li>
+
+      <li class="contact-item">
+        <div class="icon-box">
+          <ion-icon name="calendar-outline"></ion-icon>
+        </div>
+
+        <div class="contact-info">
+          <p class="contact-title">
+            
+              Geburtstag
+            
+          </p>
+
+          <time datetime="2002-11">
+            
+              November 2002
+            
+          </time>
+        </div>
+      </li>
+
+      <li class="contact-item">
+        <a href="https://www.google.com/maps/search/45277+Essen,+Deutschland" target="_blank" rel="noopener" class="icon-box">
+          <ion-icon name="location-outline"></ion-icon>
+        </a>
+
+        <div class="contact-info">
+          <p class="contact-title">
+            
+              Standort
+            
+          </p>
+
+          <address>
+            
+              45277 Essen, Deutschland
+            
+          </address>
+        </div>
+      </li>
+    </ul>
+
+    <div class="separator"></div>
+
+    <ul class="social-list">
+      <li class="social-item">
+        <a href="https://linkedin.com/in/david-picillo" class="social-link" target="_blank" rel="noopener">
+          <ion-icon name="logo-linkedin"></ion-icon>
+        </a>
+      </li>
+
+      <li class="social-item">
+        <a href="https://github.com/dpicillo" class="social-link" target="_blank" rel="noopener">
+          <ion-icon name="logo-github"></ion-icon>
+        </a>
+      </li>
+
+      <li class="social-item">
+        <a href="https://xing.com/profile/David_Picillo" class="social-link" target="_blank" rel="noopener">
+          <ion-icon name="briefcase-outline"></ion-icon>
+        </a>
+      </li>
+    </ul>
+  </div>
+</aside>
+
+    
+    <div class="main-content">
+      
+      <nav class="navbar">
+  <ul class="navbar-list">
+    
+    
+    <li class="navbar-item">
+      <a class="navbar-link" href="/">
+        
+          Über mich
+        
+      </a>
+    </li>
+
+    <li class="navbar-item">
+      <a class="navbar-link" href="/resume/">
+        
+          Lebenslauf
+        
+      </a>
+    </li>
+
+    <li class="navbar-item">
+      <a class="navbar-link active" href="/blog/">
+        
+          Blog
+        
+      </a>
+    </li>
+  </ul>
+</nav>
+
+      
+      
+<article class="blog-post" data-page="blog-post">
+  
+  <nav class="blog-nav">
+    <a href="/blog/" class="back-to-blog">
+      <svg class="back-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/>
+      </svg>
+      
+        Zurück zum Blog
+      
+    </a>
+  </nav>
+
+  <header class="blog-post-header">
+    <h1 class="h1 blog-post-title">Keycloak User Federation mit Active Directory</h1>
+    
+    
+    <div class="blog-post-meta">
+      <time datetime="2025-01-15">
+        
+          15. January 2025
+        
+      </time>
+      
+      
+      <div class="blog-post-tags">
+        
+        <span class="tag">Keycloak</span>
+        
+        <span class="tag">Active Directory</span>
+        
+        <span class="tag">LDAP</span>
+        
+        <span class="tag">SSO</span>
+        
+        <span class="tag">IAM</span>
+        
+        <span class="tag">Identity Management</span>
+        
+      </div>
+      
+    </div>
+    
+  </header>
+
+  <div class="blog-post-content">
+    <h2 id="überblick">Überblick</h2>
+<p>Die Integration von Keycloak mit Active Directory durch User Federation ermöglicht es Unternehmen, ihre bestehende AD-Infrastruktur zu nutzen und gleichzeitig moderne Identity Management-Funktionen bereitzustellen. In diesem Artikel erkläre ich die praktische Implementierung einer solchen Lösung.</p>
+<blockquote>
+<p><strong>Ziel - Single Sign-On (SSO):</strong> Bestehende AD-Benutzer sollen sich nahtlos mit ihren gewohnten Zugangsdaten bei Keycloak-geschützten Anwendungen anmelden können, ohne dass neue Accounts erstellt werden müssen. Eine zentrale IAM-Lösung für alle Anwendungen.</p></blockquote>
+<h2 id="architektur-übersicht">Architektur-Übersicht</h2>
+<p><img src="/images/diagrams/keycloak-ad-architecture.svg" alt="Keycloak Active Directory Integration Architecture"></p>
+<p>Die Architektur zeigt den Datenfluss zwischen den verschiedenen Komponenten:</p>
+<ul>
+<li><strong>Anwendungen</strong> authentifizieren sich über OIDC/SAML bei Keycloak</li>
+<li><strong>Keycloak</strong> fungiert als Identity Provider und vermittelt zwischen Apps und AD</li>
+<li><strong>Active Directory</strong> bleibt die zentrale Benutzerverwaltung</li>
+<li><strong>LDAP-Protokoll</strong> ermöglicht die Kommunikation zwischen Keycloak und AD</li>
+</ul>
+<h2 id="konfiguration-der-user-federation">Konfiguration der User Federation</h2>
+<h3 id="1-ldap-provider-erstellen">1. LDAP Provider erstellen</h3>
+<p>Navigieren Sie in der Keycloak Admin Console zu &ldquo;User Federation&rdquo; und erstellen Sie einen neuen LDAP Provider:</p>
+<pre tabindex="0"><code>Console Path: Realm → User Federation → Add Provider → LDAP
+
+Connection URL: ldaps://dc1.example.com:636
+Bind DN: CN=keycloak-svc,OU=Service Accounts,DC=example,DC=com
+Bind Credential: [Service Account Password]
+</code></pre><h3 id="2-basis-konfiguration">2. Basis-Konfiguration</h3>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># LDAP Settings</span>
+</span></span><span style="display:flex;"><span>Users DN: <span style="color:#953800">OU</span><span style="color:#0550ae">=</span>Users,DC<span style="color:#0550ae">=</span>example,DC<span style="color:#0550ae">=</span>com
+</span></span><span style="display:flex;"><span>Username LDAP attribute: sAMAccountName
+</span></span><span style="display:flex;"><span>RDN LDAP attribute: cn
+</span></span><span style="display:flex;"><span>UUID LDAP attribute: objectGUID
+</span></span><span style="display:flex;"><span>User Object Classes: person, organizationalPerson, user
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Connection Settings</span>
+</span></span><span style="display:flex;"><span>Connection Timeout: <span style="color:#0550ae">5000</span>
+</span></span><span style="display:flex;"><span>Read Timeout: <span style="color:#0550ae">10000</span>
+</span></span><span style="display:flex;"><span>Connection Pooling: <span style="color:#6639ba">true</span>
+</span></span><span style="display:flex;"><span>Pagination: <span style="color:#6639ba">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3-mapper-konfiguration">3. Mapper-Konfiguration</h3>
+<p>Erstellen Sie Attribut-Mapper für die gewünschten AD-Felder:</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#57606a"># Standard Mapper</span>
+</span></span><span style="display:flex;"><span>- username → sAMAccountName
+</span></span><span style="display:flex;"><span>- email → mail  
+</span></span><span style="display:flex;"><span>- firstName → givenName
+</span></span><span style="display:flex;"><span>- lastName → sn
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a"># Gruppen Mapper</span>
+</span></span><span style="display:flex;"><span>Name: group-ldap-mapper
+</span></span><span style="display:flex;"><span>Mapper Type: group-ldap-mapper
+</span></span><span style="display:flex;"><span>LDAP Groups DN: <span style="color:#953800">OU</span><span style="color:#0550ae">=</span>Groups,DC<span style="color:#0550ae">=</span>example,DC<span style="color:#0550ae">=</span>com
+</span></span><span style="display:flex;"><span>Group Object Classes: group
+</span></span><span style="display:flex;"><span>Group Name LDAP Attribute: cn
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="erweiterte-funktionen">Erweiterte Funktionen</h2>
+<h3 id="rollenbasierte-zugriffskontrolle">Rollenbasierte Zugriffskontrolle</h3>
+<h4 id="option-1-automatische-rollenzuweisung-basierend-auf-ad-gruppen">Option 1: Automatische Rollenzuweisung basierend auf AD-Gruppen</h4>
+<p><strong>Voraussetzungen für Option 1:</strong> Stellen Sie sicher, dass die Benutzerrollen auf dem LDAP-Server wie folgt repräsentiert sind:</p>
+<ul>
+<li>Eine Organisationseinheit (OU), z.B. &ldquo;Roles&rdquo; oder &ldquo;Groups&rdquo;</li>
+<li>Gruppen unter dieser Einheit, die die individuellen Benutzerrollen repräsentieren</li>
+<li>Das cn-Attribut der Gruppen entspricht den Namen der Keycloak-Rollen</li>
+<li>Benutzer werden über das member-Attribut zu diesen Gruppen hinzugefügt</li>
+</ul>
+<h4 id="option-2-standard-rolle-für-alle-ldap-benutzer">Option 2: Standard-Rolle für alle LDAP-Benutzer</h4>
+<p>Falls die AD-Gruppen nicht den Keycloak-Rollennamen entsprechen, verwenden Sie einen Standard-Mapper, der allen LDAP-Benutzern eine Platzhalterrolle zuweist.</p>
+<h3 id="password-sync">Password Sync</h3>
+<blockquote>
+<p><strong>Hinweis:</strong> Bei AD-Integration wird empfohlen, Passwort-Updates weiterhin über AD durchzuführen und Keycloak im READ_ONLY Modus zu betreiben.</p></blockquote>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="häufige-probleme">Häufige Probleme</h3>
+<ul>
+<li><strong>LDAP Connection Failed:</strong> Überprüfen Sie Firewall-Regeln und Zertifikate</li>
+<li><strong>User Import Issues:</strong> Validieren Sie die Users DN und Object Classes</li>
+<li><strong>Group Mapping Fehler:</strong> Stellen Sie sicher, dass der Service Account Lesezugriff auf Gruppen hat</li>
+<li><strong>Performance Probleme:</strong> Aktivieren Sie Connection Pooling und Pagination</li>
+</ul>
+<h2 id="best-practices">Best Practices</h2>
+<ul>
+<li><strong>Service Account:</strong> Verwenden Sie einen dedizierten Service Account mit minimalen Berechtigungen</li>
+<li><strong>SSL/TLS:</strong> Nutzen Sie immer verschlüsselte LDAPS-Verbindungen</li>
+<li><strong>Caching:</strong> Konfigurieren Sie angemessene Cache-Einstellungen für bessere Performance</li>
+<li><strong>Monitoring:</strong> Implementieren Sie Überwachung für LDAP-Verbindungen und Sync-Prozesse</li>
+<li><strong>Testing:</strong> Testen Sie die Integration mit verschiedenen AD-Gruppenmitgliedschaften</li>
+</ul>
+<h2 id="fazit">Fazit</h2>
+<p>Die Integration von Keycloak mit Active Directory über User Federation bietet eine elegante Lösung für hybride Identity Management-Szenarien. Durch die zentrale Verwaltung in AD bleiben bestehende Prozesse erhalten, während moderne SSO-Funktionen für neue Anwendungen verfügbar werden.</p>
+<p>Diese Architektur bildet eine solide Grundlage für die schrittweise Migration zu cloud-nativen Identity-Lösungen, ohne bestehende Workflows zu unterbrechen.</p>
+
+  </div>
+
+  
+  <footer class="blog-post-footer">
+    <a href="/blog/" class="back-to-blog-footer">
+      <svg class="back-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512">
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="48" d="M244 400L100 256l144-144M120 256h292"/>
+      </svg>
+      
+        Zurück zum Blog
+      
+    </a>
+  </footer>
+</article>
+
+    </div>
+  </main>
+
+  
+  <script type="module" src="/js/ionicons.esm.js"></script>
+  <script nomodule src="/js/ionicons.js"></script>
+  
+  
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebar = document.querySelector('[data-sidebar]');
+      const sidebarBtn = document.querySelector('[data-sidebar-btn]');
+      
+      if (sidebar && sidebarBtn) {
+        sidebarBtn.addEventListener('click', function() {
+          sidebar.classList.toggle('active');
+        });
+      }
+    });
+  </script>
+  
+  
+  <script>
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      
+      const savedLang = localStorage.getItem('preferred-language');
+      
+      if (!savedLang) {
+        
+        const browserLang = navigator.language || navigator.userLanguage;
+        const detectedLang = browserLang.startsWith('de') ? 'de' : 'en';
+        
+        
+        const currentLang = 'de';
+        
+        
+        if (detectedLang !== currentLang) {
+          const currentPath = window.location.pathname;
+          let newPath;
+          
+          if (detectedLang === 'de') {
+            
+            newPath = currentPath.replace(/^\/en\//, '/').replace(/^\/en$/, '/');
+          } else {
+            
+            if (currentPath === '/' || currentPath === '') {
+              newPath = '/en/';
+            } else {
+              newPath = '/en' + currentPath;
+            }
+          }
+          
+          
+          if (newPath !== currentPath) {
+            window.location.href = newPath;
+          }
+        }
+        
+        
+        localStorage.setItem('preferred-language', detectedLang);
+      }
+    });
+  </script>
+</body>
+</html>

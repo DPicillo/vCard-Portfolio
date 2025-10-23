@@ -1,0 +1,90 @@
+baseURL = 'https://david.picillo.de'
+languageCode = 'de'
+title = 'David Picillo - Cloud DevOps Engineer'
+defaultContentLanguage = 'de'
+
+# Theme (wir verwenden kein externes Theme, sondern eigene Layouts)
+# theme = ''
+
+# Mehrsprachige Konfiguration
+[languages]
+  [languages.de]
+    languageName = 'Deutsch'
+    weight = 1
+    title = 'David Picillo - Cloud DevOps Engineer'
+    [languages.de.params]
+      description = 'Erfahrener Cloud DevOps Engineer mit Spezialisierung auf AWS, Kubernetes und Infrastructure as Code.'
+      
+  [languages.en]
+    languageName = 'English'
+    weight = 2
+    title = 'David Picillo - Cloud DevOps Engineer'
+    [languages.en.params]
+      description = 'Experienced Cloud DevOps Engineer specializing in AWS, Kubernetes, and Infrastructure as Code.'
+
+# Globale Parameter
+[params]
+  author = 'David Picillo'
+  email = 'david@picillo.de'
+  location = '45277 Essen, Germany'
+  birthday = '2002-11'
+  linkedin = 'https://linkedin.com/in/david-picillo'
+  github = 'https://github.com/dpicillo'
+  xing = 'https://xing.com/profile/David_Picillo'
+  
+  # SEO
+  keywords = ['David Picillo', 'Cloud DevOps Engineer', 'AWS', 'Kubernetes', 'DevOps', 'Infrastructure as Code', 'Terraform', 'Docker', 'CI/CD']
+  
+  # Theme Farben
+  primaryColor = '#F97316'
+  
+# Menü-Konfiguration
+[menu]
+  [[menu.main]]
+    name = 'Über mich'
+    url = '/'
+    weight = 1
+    [menu.main.params]
+      en_name = 'About'
+      
+  [[menu.main]]
+    name = 'Lebenslauf'
+    url = '/resume/'
+    weight = 2
+    [menu.main.params]
+      en_name = 'Resume'
+      
+  [[menu.main]]
+    name = 'Blog'
+    url = '/blog/'
+    weight = 3
+    [menu.main.params]
+      en_name = 'Blog'
+
+# Markup-Konfiguration
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = 'github'
+    lineNos = true
+
+# Build-Konfiguration
+[build]
+  writeStats = true
+
+# Ausgabe-Formate
+[outputs]
+  home = ['HTML', 'RSS', 'JSON']
+  page = ['HTML']
+  section = ['HTML', 'RSS']
+
+# Sitemap-Konfiguration
+[sitemap]
+  changefreq = 'weekly'
+  priority = 0.5
+
+# Taxonomien-Konfiguration - Deaktiviert Taxonomien komplett
+[taxonomies]
+  # Leere Taxonomien-Konfiguration deaktiviert Categories und Tags

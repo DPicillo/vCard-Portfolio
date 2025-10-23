@@ -1,0 +1,122 @@
+{{ define "main" }}
+<article class="about active" data-page="about">
+  <header>
+    <h2 class="h2 article-title">{{ .Title }}</h2>
+  </header>
+
+  <section class="about-text">
+    {{ .Content }}
+  </section>
+
+  <!--
+    - service
+  -->
+  <section class="service">
+    <h3 class="h3 service-title">
+      {{ if eq .Site.Language.Lang "de" }}
+        Tätigkeiten
+      {{ else }}
+        What i'm doing
+      {{ end }}
+    </h3>
+
+    <ul class="service-list">
+      <li class="service-item">
+        <div class="service-icon-box">
+          <img src="/images/cloud-icon.svg" alt="Cloud Infrastructure AWS DevOps Services Icon" width="40" height="40" loading="lazy">
+        </div>
+
+        <div class="service-content-box">
+          <h4 class="h4 service-item-title">
+            {{ if eq .Site.Language.Lang "de" }}
+              Cloud-Infrastruktur
+            {{ else }}
+              Cloud Infrastructure
+            {{ end }}
+          </h4>
+
+          <p class="service-item-text">
+            {{ if eq .Site.Language.Lang "de" }}
+              Professionelle Verwaltung und Skalierung von AWS-Cloud-Infrastrukturen mit modernen DevOps-Praktiken.
+            {{ else }}
+              Professional management and scaling of AWS cloud infrastructures with modern DevOps practices.
+            {{ end }}
+          </p>
+        </div>
+      </li>
+
+      <li class="service-item">
+        <div class="service-icon-box">
+          <img src="/images/k8s-icon.svg" alt="Kubernetes Administration Container Orchestration Icon" width="40" height="40" loading="lazy">
+        </div>
+
+        <div class="service-content-box">
+          <h4 class="h4 service-item-title">
+            {{ if eq .Site.Language.Lang "de" }}
+              Kubernetes-Administration
+            {{ else }}
+              Kubernetes Administration
+            {{ end }}
+          </h4>
+
+          <p class="service-item-text">
+            {{ if eq .Site.Language.Lang "de" }}
+              Verwaltung und Orchestrierung von Container-Clustern sowohl on-premise als auch in der Cloud (EKS).
+            {{ else }}
+              Management and orchestration of container clusters both on-premise and in the cloud (EKS).
+            {{ end }}
+          </p>
+        </div>
+      </li>
+
+      <li class="service-item">
+        <div class="service-icon-box">
+          <img src="/images/gitlab-icon.svg" alt="CI/CD Automation Infrastructure as Code Icon" width="40" height="40" loading="lazy">
+        </div>
+
+        <div class="service-content-box">
+          <h4 class="h4 service-item-title">
+            {{ if eq .Site.Language.Lang "de" }}
+              CI/CD & Automation
+            {{ else }}
+              CI/CD & Automation
+            {{ end }}
+          </h4>
+
+          <p class="service-item-text">
+            {{ if eq .Site.Language.Lang "de" }}
+              Implementierung von automatisierten Deployment-Pipelines und Infrastructure-as-Code mit Terraform.
+            {{ else }}
+              Implementation of automated deployment pipelines and Infrastructure as Code with Terraform.
+            {{ end }}
+          </p>
+        </div>
+      </li>
+
+      <li class="service-item">
+        <div class="service-icon-box">
+          <img src="/images/monitoring-icon.svg" alt="Monitoring Logging Observability Prometheus Grafana Icon" width="40" height="40" loading="lazy">
+        </div>
+
+        <div class="service-content-box">
+          <h4 class="h4 service-item-title">
+            {{ if eq .Site.Language.Lang "de" }}
+              Monitoring & Logging
+            {{ else }}
+              Monitoring & Logging
+            {{ end }}
+          </h4>
+
+          <p class="service-item-text">
+            {{ if eq .Site.Language.Lang "de" }}
+              Aufbau und Wartung von Logging-, Tracing- und Monitoring-Systemen für cloud-native Anwendungen.
+            {{ else }}
+              Setup and maintenance of logging, tracing, and monitoring systems for cloud-native applications.
+            {{ end }}
+          </p>
+        </div>
+      </li>
+    </ul>
+  </section>
+</article>
+{{ end }}

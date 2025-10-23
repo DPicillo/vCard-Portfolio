@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}</title>
+  <meta name="title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+  <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta name="keywords" content="{{ delimit .Site.Params.keywords ", " }}">
+  <meta name="author" content="{{ .Site.Params.author }}">
+  <meta name="robots" content="index, follow">
+  <meta name="language" content="{{ .Site.Language.Lang }}">
+  <meta name="revisit-after" content="7 days">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ .Permalink }}">
+  
+  <!-- Hreflang for multilingual content -->
+  {{ range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Lang }}" href="{{ .Permalink }}">
+  {{ end }}
+  <link rel="alternate" hreflang="x-default" href="{{ .Site.BaseURL }}">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+  <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="og:image" content="{{ .Site.BaseURL }}images/DPicillo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="David Picillo - Cloud DevOps Engineer">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  <meta property="og:locale" content="{{ if eq .Site.Language.Lang "de" }}de_DE{{ else }}en_US{{ end }}">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ .Permalink }}">
+  <meta property="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} - {{ .Site.Title }}{{ end }}">
+  <meta property="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <meta property="twitter:image" content="{{ .Site.BaseURL }}images/DPicillo.png">
+  <meta property="twitter:image:alt" content="David Picillo - Cloud DevOps Engineer">
+  
+  <!-- LinkedIn -->
+  <meta property="article:author" content="{{ .Site.Params.linkedin }}">
+  
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ .Site.Params.author }}",
+    "jobTitle": "Cloud DevOps Engineer",
+    "description": "{{ .Site.Params.description }}",
+    "url": "{{ .Site.BaseURL }}",
+    "image": "{{ .Site.BaseURL }}images/DPicillo.png",
+    "email": "{{ .Site.Params.email }}",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Essen",
+      "postalCode": "45277",
+      "addressCountry": "Germany"
+    },
+    "worksFor": {
+      "@type": "Organization",
+      "name": "OBI Smart Technologies GmbH",
+      "url": "https://www.obi.de"
+    },
+    "sameAs": [
+      "{{ .Site.Params.linkedin }}",
+      "{{ .Site.Params.github }}",
+      "{{ .Site.Params.xing }}"
+    ]
+  }
+  </script>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/DPicillo.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/DPicillo.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <!-- Theme color for mobile browsers -->
+  <meta name="theme-color" content="{{ .Site.Params.primaryColor }}">
+  <meta name="msapplication-TileColor" content="{{ .Site.Params.primaryColor }}">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="{{ .Site.Title }}">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/fonts.css">
+  
+  <!-- Language Toggle Styles -->
+  <style>
+    .language-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      display: flex;
+      gap: 4px;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+      opacity: 0.7;
+      transition: all 0.3s ease;
+    }
+    
+    .language-toggle:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+    
+    .lang-btn {
+      width: 28px;
+      height: 20px;
+      border: 1px solid transparent;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background-size: cover;
+      background-position: center;
+      text-decoration: none;
+      display: block;
+    }
+    
+    .lang-btn.active {
+      border-color: {{ .Site.Params.primaryColor }};
+      box-shadow: 0 1px 4px rgba(249, 115, 22, 0.3);
+    }
+    
+    .lang-btn:hover {
+      transform: scale(1.1);
+    }
+    
+    .lang-de {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjMDAwMDAwIi8+CjxyZWN0IHk9IjEwIiB3aWR0aD0iNDAiIGhlaWdodD0iMTAiIGZpbGw9IiNERDAwMDAiLz4KPHJlY3QgeT0iMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIxMCIgZmlsbD0iI0ZGQ0UwMCIvPgo8L3N2Zz4K');
+    }
+    
+    .lang-en {
+      background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCA0MCAzMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQwIiBoZWlnaHQ9IjMwIiBmaWxsPSIjQjIyMjM0Ii8+CjxyZWN0IHk9IjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSI2IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMTAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIxNCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHk9IjE4IiB3aWR0aD0iNDAiIGhlaWdodD0iMiIgZmlsbD0id2hpdGUiLz4KPHJlY3QgeT0iMjIiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cmVjdCB5PSIyNiIgd2lkdGg9IjQwIiBoZWlnaHQ9IjIiIGZpbGw9IndoaXRlIi8+CjxyZWN0IHdpZHRoPSIxNiIgaGVpZ2h0PSIxNCIgZmlsbD0iIzNCNEE5QSIvPgo8L3N2Zz4K');
+    }
+    
+    @media (max-width: 580px) {
+      .language-toggle {
+        opacity: 0.4;
+        transform: scale(0.8);
+        top: 5px;
+        right: 5px;
+      }
+      
+      .language-toggle:hover {
+        opacity: 1;
+        transform: scale(1);
+      }
+      
+      .lang-btn {
+        width: 24px;
+        height: 16px;
+      }
+    }
+    
+    @media (min-width: 1250px) {
+      .language-toggle {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        opacity: 0.8;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Language Toggle -->
+  <div class="language-toggle">
+    {{ range .AllTranslations }}
+      <a href="{{ .RelPermalink }}" class="lang-btn lang-{{ .Language.Lang }}{{ if eq .Language.Lang $.Site.Language.Lang }} active{{ end }}" title="{{ .Language.LanguageName }}"></a>
+    {{ end }}
+  </div>
+
+  <!--
+    - #MAIN
+  -->
+  <main>
+    <!--
+      - #SIDEBAR
+    -->
+    {{ partial "sidebar.html" . }}
+
+    <!--
+      - #main-content
+    -->
+    <div class="main-content">
+      <!--
+        - #NAVBAR
+      -->
+      {{ partial "navbar.html" . }}
+
+      <!--
+        - #CONTENT
+      -->
+      {{ block "main" . }}{{ end }}
+    </div>
+  </main>
+
+  <!-- JavaScript -->
+  <script type="module" src="/js/ionicons.esm.js"></script>
+  <script nomodule src="/js/ionicons.js"></script>
+  
+  <!-- Sidebar Toggle Script -->
+  <script>
+    // Sidebar toggle functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidebar = document.querySelector('[data-sidebar]');
+      const sidebarBtn = document.querySelector('[data-sidebar-btn]');
+      
+      if (sidebar && sidebarBtn) {
+        sidebarBtn.addEventListener('click', function() {
+          sidebar.classList.toggle('active');
+        });
+      }
+    });
+  </script>
+  
+  <!-- Portfolio JavaScript -->
+  <script src="/js/portfolio.js"></script>
+</body>
+</html>
