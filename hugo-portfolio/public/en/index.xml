@@ -1,6 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>About me on David Picillo - Cloud DevOps Engineer</title><link>https://david.picillo.de/en/</link><description>Recent content in About me on David Picillo - Cloud DevOps Engineer</description><generator>Hugo</generator><language>en</language><lastBuildDate>Wed, 15 Jan 2025 10:00:00 +0000</lastBuildDate><atom:link href="https://david.picillo.de/en/index.xml" rel="self" type="application/rss+xml"/><item><title>Keycloak User Federation with Active Directory</title><link>https://david.picillo.de/en/blog/keycloak-active-directory/</link><pubDate>Wed, 15 Jan 2025 10:00:00 +0000</pubDate><guid>https://david.picillo.de/en/blog/keycloak-active-directory/</guid><description>&lt;h2 id="overview"&gt;Overview&lt;/h2&gt;
-&lt;p&gt;Integrating Keycloak with Active Directory through User Federation enables organizations to leverage their existing AD infrastructure while providing modern Identity Management capabilities. This article explains the practical implementation of such a solution.&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Goal - Single Sign-On (SSO):&lt;/strong&gt; Existing AD users should be able to seamlessly authenticate with their familiar credentials in Keycloak-protected applications without requiring new account creation. A centralized IAM solution for all applications.&lt;/p&gt;&lt;/blockquote&gt;
-&lt;h2 id="architecture-overview"&gt;Architecture Overview&lt;/h2&gt;
-&lt;p&gt;&lt;img src="https://david.picillo.de/images/diagrams/keycloak-ad-architecture.svg" alt="Keycloak Active Directory Integration Architecture"&gt;&lt;/p&gt;</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>About me on David Picillo - Cloud DevOps Engineer</title>
+    <link>https://david.picillo.de/en/</link>
+    <description>Recent content in About me on David Picillo - Cloud DevOps Engineer</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Wed, 15 Jan 2025 10:00:00 +0000</lastBuildDate>
+    <atom:link href="https://david.picillo.de/en/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Keycloak User Federation with Active Directory</title>
+      <link>https://david.picillo.de/en/blog/keycloak-active-directory/</link>
+      <pubDate>Wed, 15 Jan 2025 10:00:00 +0000</pubDate>
+      <guid>https://david.picillo.de/en/blog/keycloak-active-directory/</guid>
+      <description>&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;&#xA;&lt;p&gt;Integrating Keycloak with Active Directory through User Federation enables organizations to leverage their existing AD infrastructure while providing modern Identity Management capabilities. This article explains the practical implementation of such a solution.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;strong&gt;Goal - Single Sign-On (SSO):&lt;/strong&gt; Existing AD users should be able to seamlessly authenticate with their familiar credentials in Keycloak-protected applications without requiring new account creation. A centralized IAM solution for all applications.&lt;/p&gt;&lt;/blockquote&gt;&#xA;&lt;h2 id=&#34;architecture-overview&#34;&gt;Architecture Overview&lt;/h2&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://david.picillo.de/images/diagrams/keycloak-ad-architecture.svg&#34; alt=&#34;Keycloak Active Directory Integration Architecture&#34;&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
