@@ -286,11 +286,72 @@ function setLanguage(lang) {
   }
 }
 
+// Function to detect if the visitor is a bot
+function isBot() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  const botPatterns = [
+    'googlebot',
+    'bingbot',
+    'slurp',
+    'duckduckbot',
+    'baiduspider',
+    'yandexbot',
+    'facebookexternalhit',
+    'twitterbot',
+    'rogerbot',
+    'linkedinbot',
+    'embedly',
+    'quora link preview',
+    'showyoubot',
+    'outbrain',
+    'pinterest',
+    'developers.google.com/+/web/snippet',
+    'slackbot',
+    'vkshare',
+    'w3c_validator',
+    'redditbot',
+    'applebot',
+    'whatsapp',
+    'flipboard',
+    'tumblr',
+    'bitlybot',
+    'skypeuripreview',
+    'nuzzel',
+    'discordbot',
+    'qwantify',
+    'pinterestbot',
+    'bitrix link preview',
+    'xing-contenttabreceiver',
+    'chrome-lighthouse',
+    'telegrambot',
+    'bot',
+    'crawler',
+    'spider',
+    'headless'
+  ];
+
+  return botPatterns.some(bot => userAgent.includes(bot));
+}
+
 // Initialize language on page load
 document.addEventListener('DOMContentLoaded', function() {
-  // Check for saved language preference
+  // Don't redirect bots - let them crawl the actual URL they requested
+  if (isBot()) {
+    // Only add click handlers for language switching
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const lang = this.classList.contains('lang-de') ? 'de' : 'en';
+        setLanguage(lang);
+      });
+    });
+    return;
+  }
+
+  // Only check for saved language preference - NO automatic browser language detection
+  // This ensures bots and first-time visitors see the URL they requested
   const savedLang = localStorage.getItem('preferred-language');
-  
+
   if (savedLang) {
     // Validate saved language
     const validLanguages = ['de', 'en'];
@@ -298,30 +359,15 @@ document.addEventListener('DOMContentLoaded', function() {
       // Get current page language from URL
       const currentPath = window.location.pathname;
       const currentLang = currentPath.startsWith('/en') ? 'en' : 'de';
-      
+
       // If saved language differs from current URL, redirect
+      // This only applies to returning visitors who previously selected a language
       if (savedLang !== currentLang) {
         setLanguage(savedLang);
       }
     } else {
       // Invalid saved language, remove it
       localStorage.removeItem('preferred-language');
-    }
-  } else {
-    // No saved preference - detect browser language on first visit
-    const browserLang = navigator.language || navigator.userLanguage;
-    const detectedLang = browserLang.startsWith('de') ? 'de' : 'en';
-    
-    // Get current page language from URL
-    const currentPath = window.location.pathname;
-    const currentLang = currentPath.startsWith('/en') ? 'en' : 'de';
-    
-    // If detected language differs from current page, redirect
-    if (detectedLang !== currentLang) {
-      setLanguage(detectedLang);
-    } else {
-      // Save the current language as preference
-      localStorage.setItem('preferred-language', currentLang);
     }
   }
   
