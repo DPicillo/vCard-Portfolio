@@ -89,7 +89,6 @@ jobs:
             -s ./hugo-portfolio \
             --gc \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/" \
             --cacheDir "${{ runner.temp }}/hugo_cache" \
             --environment production
       - name: Cache save
