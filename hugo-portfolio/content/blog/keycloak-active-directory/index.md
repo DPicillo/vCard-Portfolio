@@ -1,6 +1,7 @@
 ---
 title: "Keycloak User Federation mit Active Directory"
 date: 2025-01-15T10:00:00Z
+lastmod: 2025-11-21T10:00:00Z
 description: "Umfassender Leitfaden zur Integration von Keycloak mit Active Directory über LDAP User Federation für Single Sign-On und Identity Management."
 tags: ["Keycloak", "Active Directory", "LDAP", "SSO", "IAM", "Identity Management"]
 categories: ["Identity and Access Management"]
