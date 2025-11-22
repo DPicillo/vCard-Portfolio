@@ -335,43 +335,7 @@ function isBot() {
 
 // Initialize language on page load
 document.addEventListener('DOMContentLoaded', function() {
-  // Don't redirect bots - let them crawl the actual URL they requested
-  if (isBot()) {
-    // Only add click handlers for language switching
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.preventDefault();
-        const lang = this.classList.contains('lang-de') ? 'de' : 'en';
-        setLanguage(lang);
-      });
-    });
-    return;
-  }
-
-  // Only check for saved language preference - NO automatic browser language detection
-  // This ensures bots and first-time visitors see the URL they requested
-  const savedLang = localStorage.getItem('preferred-language');
-
-  if (savedLang) {
-    // Validate saved language
-    const validLanguages = ['de', 'en'];
-    if (validLanguages.includes(savedLang)) {
-      // Get current page language from URL
-      const currentPath = window.location.pathname;
-      const currentLang = currentPath.startsWith('/en') ? 'en' : 'de';
-
-      // If saved language differs from current URL, redirect
-      // This only applies to returning visitors who previously selected a language
-      if (savedLang !== currentLang) {
-        setLanguage(savedLang);
-      }
-    } else {
-      // Invalid saved language, remove it
-      localStorage.removeItem('preferred-language');
-    }
-  }
-  
-  // Add click handlers to language buttons
+  // Add click handlers to language buttons (manual switching only, no automatic redirects)
   document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', function(e) {
       e.preventDefault();

@@ -393,49 +393,5 @@
       }
     });
   </script>
-  
-  <!-- Auto Language Detection -->
-  <script>
-    // Auto-detect browser language on first visit
-    document.addEventListener('DOMContentLoaded', function() {
-      // Check if user has already set a language preference
-      const savedLang = localStorage.getItem('preferred-language');
-      
-      if (!savedLang) {
-        // Detect browser language
-        const browserLang = navigator.language || navigator.userLanguage;
-        const detectedLang = browserLang.startsWith('de') ? 'de' : 'en';
-        
-        // Get current page language
-        const currentLang = '{{ .Site.Language.Lang }}';
-        
-        // If detected language differs from current, redirect
-        if (detectedLang !== currentLang) {
-          const currentPath = window.location.pathname;
-          let newPath;
-          
-          if (detectedLang === 'de') {
-            // Switch to German
-            newPath = currentPath.replace(/^\/en\//, '/').replace(/^\/en$/, '/');
-          } else {
-            // Switch to English
-            if (currentPath === '/' || currentPath === '') {
-              newPath = '/en/';
-            } else {
-              newPath = '/en' + currentPath;
-            }
-          }
-          
-          // Only redirect if the path actually changed
-          if (newPath !== currentPath) {
-            window.location.href = newPath;
-          }
-        }
-        
-        // Save the detected language
-        localStorage.setItem('preferred-language', detectedLang);
-      }
-    });
-  </script>
 </body>
 </html>
